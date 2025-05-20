@@ -1,0 +1,6 @@
+type_model,label_type_model,color_model,color_model_font
+locf,LOCF,#DEF5E5FF,#000000
+lr,LR,#49C1ADFF,#000000
+nn,RNN,#357BA2FF,#FFFFFF
+lstm,LSTM,#3E356BFF,#FFFFFF
+xgb,XGBoost,#0B0405FF,#FFFFFF

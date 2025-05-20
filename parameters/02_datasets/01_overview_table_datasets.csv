@@ -1,0 +1,17 @@
+number_xy,number_combination_features,name_data_set,label_dataset,label_dataset_linebreak,color_dataset,color_dataset_font
+001,000,base,A (COVID-19-related hospital admissions),"A (COVID-19-related 
+hospital admissions)",#FAEBDDFF,#000000
+001,000,age,B (A + COVID-19-related hospital admissions by age group),"B (A + COVID-19-related 
+hospital admissions by age group)",#F7C9AAFF,#000000
+001,001,base,C (A + emergency),C (A + emergency),#F6A47BFF,#000000
+001,008,base,D (A + ICD10 chapters),D (A + ICD10 chapters),#F47C56FF,#000000
+001,007,base,E (A + ICD10 categories),E (A + ICD10 categories),#ED513EFF,#000000
+001,006,base,F (A + ICD10 codes),F (A + ICD10 codes),#D92847FF,#000000
+001,002,base,G (A + fever),G (A + fever),#B91657FF,#FFFFFF
+001,005,base,H (A + CRP),H (A + CRP),#921C5BFF,#FFFFFF
+001,010,base,I (A + emergency + ICD10 codes + fever + CRP),"I (A + emergency + ICD10 codes + 
+fever + CRP)",#6A1F56FF,#FFFFFF
+001,004,base,J (Wastewater),J (Wastewater),#451C47FF,#FFFFFF
+001,003,base,K (A + wastewater),K (A + wastewater),#221331FF,#FFFFFF
+001,009,base,L (A + emergency + ICD10 codes + fever + CRP + wastewater),"L (A + emergency + ICD10 codes + 
+fever + CRP + wastewater)",#03051AFF,#FFFFFF
