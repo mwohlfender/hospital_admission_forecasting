@@ -18,22 +18,6 @@ table_days_icd_u07_1_20200101_20230630 <- read_csv(file = paste0(Directory_Data,
 
 
 
-
-table_days_icd_u07_1_20200101_20230630 <- table_days_icd_u07_1_20200101_20230630 %>%
-  mutate(icd10_code_U07_1 = replace(icd10_code_U07_1, icd10_code_U07_1 == "Below 5", 0)) %>%
-  mutate(icd10_code_U07_1_group_age_1 = replace(icd10_code_U07_1_group_age_1, icd10_code_U07_1_group_age_1 == "Below 5", 0)) %>%
-  mutate(icd10_code_U07_1_group_age_2 = replace(icd10_code_U07_1_group_age_2, icd10_code_U07_1_group_age_2 == "Below 5", 0)) %>%
-  mutate(icd10_code_U07_1_group_age_3 = replace(icd10_code_U07_1_group_age_3, icd10_code_U07_1_group_age_3 == "Below 5", 0)) %>%
-  mutate(icd10_code_U07_1_group_age_4 = replace(icd10_code_U07_1_group_age_4, icd10_code_U07_1_group_age_4 == "Below 5", 0)) %>%
-  mutate(icd10_code_U07_1_group_age_5 = replace(icd10_code_U07_1_group_age_5, icd10_code_U07_1_group_age_5 == "Below 5", 0)) %>%
-  mutate(across(where(is.character), as.numeric))
-
-
-
-
-
-
-
 # data set "base": basic configuration (no stratification) ----
 
 # name of data set (determined by stratification)
@@ -98,7 +82,7 @@ for (ii in 1:length(list_N)) {
 
 
 # store `data_features_000_base`
-path_data_features_000_base <- get_path_data_features(directory_data = Directory_Data_Models,
+path_data_features_000_base <- get_path_data_features(directory_data = paste0(Directory_Data, Subdirectory_Data_Feature_sets),
                                                       number_xy = number_xy,
                                                       number_combination_features = number_combination_features,
                                                       name_data_set = name_data_set)
@@ -180,7 +164,7 @@ for (ii in 1:length(list_N)) {
 
 
 # store `data_features_000_age`
-path_data_features_000_age <- get_path_data_features(directory_data = Directory_Data_Models,
+path_data_features_000_age <- get_path_data_features(directory_data = paste0(Directory_Data, Subdirectory_Data_Feature_sets),
                                                      number_xy = number_xy,
                                                      number_combination_features = number_combination_features,
                                                      name_data_set = name_data_set)

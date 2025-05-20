@@ -20,18 +20,18 @@ create_grid_combinations_kNp_dates_train_test <- function(number_grid,
   if (!(file.exists(path_output)) | do_new) {
     
     # read parameter grid: train-test splits
-    table_dates_train_test <- read_csv(paste0(Directory_Parameters, Path_Table_Dates_Train_Test_Detailed))
+    table_dates_train_test_detailed <- read_csv(paste0(Directory_Parameters, Path_Table_Dates_Train_Test_Detailed))
     
-    # filter `table_dates_train_test` to groups of train-test splits contained in `list_groups_dates_train_test`
-    table_dates_train_test_0 <- table_dates_train_test %>%
+    # filter `table_dates_train_test_detailed` to groups of train-test splits contained in `list_groups_dates_train_test`
+    table_dates_train_test_detailed_filtered <- table_dates_train_test_detailed %>%
       filter(group %in% list_groups_dates_train_test) %>%
       dplyr::select(c("group", "number")) %>%
       dplyr::rename(c("group_dates_train_test" = "group", "number_dates_train_test" = "number"))
     
-    # `table_dates_train_test_0`:
+    # `table_dates_train_test_detailed_filtered`:
     # (a) repeat each row as many times as there are elements in `list_numbers_combinations_kNp`
     # (b) add column `list_numbers_combinations_kNp`
-    grid_combinations_kNp_dates_train_test <- table_dates_train_test_0 %>%
+    grid_combinations_kNp_dates_train_test <- table_dates_train_test_detailed_filtered %>%
       dplyr::slice(rep(1:n(), each = length(list_numbers_combinations_kNp))) %>%
       mutate(number_combination_kNp = rep(x = list_numbers_combinations_kNp, times = nrow(table_dates_train_test_0))) %>%
       dplyr::select(c("number_combination_kNp", "group_dates_train_test", "number_dates_train_test")) %>%

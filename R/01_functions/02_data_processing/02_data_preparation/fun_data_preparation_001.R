@@ -37,7 +37,7 @@ data_preparation_001 <- function(data_features,
                                  overwrite = FALSE) {
   
   # determine paths of output
-  path_data_train <- get_path_data_train(directory_data = Directory_Data_Models,
+  path_data_train <- get_path_data_train(directory_data = paste0(Directory_Data, Subdirectory_Data_Feature_sets),
                                          number_xy = number_xy,
                                          number_combination_features = number_combination_features,
                                          name_data_set = name_data_set,
@@ -45,7 +45,7 @@ data_preparation_001 <- function(data_features,
                                          group_dates_train_test = group_dates_train_test,
                                          number_dates_train_test = number_dates_train_test)
   
-  path_data_test <- get_path_data_test(directory_data = Directory_Data_Models,
+  path_data_test <- get_path_data_test(directory_data = paste0(Directory_Data, Subdirectory_Data_Feature_sets),
                                        number_xy = number_xy,
                                        number_combination_features = number_combination_features,
                                        name_data_set = name_data_set,
@@ -53,7 +53,7 @@ data_preparation_001 <- function(data_features,
                                        group_dates_train_test = group_dates_train_test,
                                        number_dates_train_test = number_dates_train_test)
   
-  path_target_train <- get_path_target_train(directory_data = Directory_Data_Models,
+  path_target_train <- get_path_target_train(directory_data = paste0(Directory_Data, Subdirectory_Data_Feature_sets),
                                              number_xy = number_xy,
                                              number_combination_features = number_combination_features,
                                              name_data_set = name_data_set,
@@ -61,7 +61,7 @@ data_preparation_001 <- function(data_features,
                                              group_dates_train_test = group_dates_train_test,
                                              number_dates_train_test = number_dates_train_test)
   
-  path_target_test <- get_path_target_test(directory_data = Directory_Data_Models,
+  path_target_test <- get_path_target_test(directory_data = paste0(Directory_Data, Subdirectory_Data_Feature_sets),
                                            number_xy = number_xy,
                                            number_combination_features = number_combination_features,
                                            name_data_set = name_data_set,

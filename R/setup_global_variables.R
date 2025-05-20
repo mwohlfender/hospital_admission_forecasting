@@ -99,13 +99,16 @@ Subdirectory_Data_Hospital <- "01_hospital/"
 # subdirectory within `Directory_Data` where wastewater data is stored
 Subdirectory_Data_Wastewater <- "02_wastewater/"
 
+# subdirectory within `Directory_Data` where feature sets are stored
+Subdirectory_Data_Feature_sets <- "03_feature_sets/"
+
 
 # paths of processed anonymized hospital data
 Path_Table_Days_ICD_U07_1_20200101_20230630_Anonymized <- paste0(Subdirectory_Data_Hospital, "processed/table_days_icd_u07_1_anonymized.csv")
 Path_Table_Days_Visits_Emergency_20200101_20230630_Anonymized <- paste0(Subdirectory_Data_Hospital, "processed/table_days_visits_emergency_anonymized.csv")
-Path_Table_Days_Fever_Anonymized <- paste0(Subdirectory_Data_Hospital, "processed/table_days_fever_anonymized.csv")
-Path_Table_Days_Number_Patients_High_CRP_Anonymized <- paste0(Subdirectory_Data_Hospital, "processed/table_days_number_patients_high_crp_anonymized.csv")
-Path_Table_Days_ICD_Freq_Codes_Cat_Chap_Covid_Anonymized <- paste0(Subdirectory_Data_Hospital, "processed/table_days_icd_freq_codes_cat_chap_covid_anonymized.csv")
+Path_Table_Days_Fever_20200101_20230630_Anonymized <- paste0(Subdirectory_Data_Hospital, "processed/table_days_fever_anonymized.csv")
+Path_Table_Days_Number_Patients_High_CRP_20200101_20230630_Anonymized <- paste0(Subdirectory_Data_Hospital, "processed/table_days_number_patients_high_crp_anonymized.csv")
+Path_Table_Days_ICD_Freq_Codes_Cat_Chap_Covid_20200101_20230630_Anonymized <- paste0(Subdirectory_Data_Hospital, "processed/table_days_icd_freq_codes_cat_chap_covid_anonymized.csv")
 
 # path of raw wastewater data
 Path_Data_Wastewater_Raw <- paste0(Subdirectory_Data_Wastewater, "raw/processed_normed_data_laupen_v2.csv")
