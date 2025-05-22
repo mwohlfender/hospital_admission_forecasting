@@ -3,7 +3,7 @@
 # # load R packages ----
 # 
 # # tidyverse
-# library(ggplot2) # yes
+library(ggplot2)
 library(dplyr)
 library(tidyr)
 library(readr)
@@ -38,17 +38,17 @@ library(lubridate)
 # library(scrutiny)
 # 
 # # time series
-# library(timetk)
+library(timetk)
 library(zoo)
 
 # # visualization
-# library(cowplot)
+library(cowplot)
 # library(DT)
 # library(ggforce)
-# library(ggpubr)
+library(ggpubr)
 # library(ggridges)
 # library(shiny)
-# library(flextable)
+library(flextable)
 # library(officer)
 library(scales)
 
@@ -66,7 +66,7 @@ library(scales)
 
 
 # define default values for flextables
-# set_flextable_defaults(background.color = "white")
+set_flextable_defaults(background.color = "white")
 
 
 # define global variables
@@ -83,5 +83,82 @@ lapply(X = files_R, FUN = function(x) {source(paste0(path_script_R, x), echo = F
 # path_script_python <- "python/functions/"
 # files_python <- dir(path = path_script_python)
 # lapply(X = files_python, FUN = function(x) {source_python(paste0(path_script_python, x))})
+
+
+# define additional R functions ----
+
+# rounding functions
+custom_round_down <- function(x, accuracy) {
+  
+  if (accuracy == 0) {
+    
+    return(0)
+    
+  } else {
+    
+    accuracy <- abs(accuracy)
+    
+  }
+  
+  boundary_1 <- floor(x / accuracy) * accuracy
+  boundary_2 <- ceiling(x / accuracy) * accuracy
+  
+  if (boundary_1 + accuracy <= x | boundary_2 - accuracy >= x | boundary_1 == boundary_2) {
+    
+    return(x)
+    
+  } else {
+    
+    return(boundary_1)
+    
+  }
+  
+}
+
+
+custom_round_up <- function(x, accuracy) {
+  
+  if (accuracy == 0) {
+    
+    return(0)
+    
+  } else {
+    
+    accuracy <- abs(accuracy)
+    
+  }
+  
+  boundary_1 <- floor(x / accuracy) * accuracy
+  boundary_2 <- ceiling(x / accuracy) * accuracy
+  
+  if (boundary_1 + accuracy <= x | boundary_2 - accuracy >= x | boundary_1 == boundary_2) {
+    
+    return(x)
+    
+  } else {
+    
+    return(boundary_2)
+    
+  }
+  
+}
+
+
+custom_round <- function(x, accuracy) {
+  
+  x_round_up <- custom_round_up(x, accuracy)
+  x_round_down <- custom_round_down(x, accuracy)
+  
+  if (abs(x - x_round_up) <= abs(x - x_round_down)) {
+    
+    return(x_round_up)
+    
+  } else {
+    
+    return(x_round_down)
+    
+  }
+  
+}
 
 

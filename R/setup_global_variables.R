@@ -9,90 +9,10 @@ Bool_Create_Plots_Do_New <- FALSE
 
 
 
-# define additional R functions ----
-
-# rounding functions
-custom_round_down <- function(x, accuracy) {
-  
-  if (accuracy == 0) {
-    
-    return(0)
-    
-  } else {
-    
-    accuracy <- abs(accuracy)
-    
-  }
-  
-  boundary_1 <- floor(x / accuracy) * accuracy
-  boundary_2 <- ceiling(x / accuracy) * accuracy
-  
-  if (boundary_1 + accuracy <= x | boundary_2 - accuracy >= x | boundary_1 == boundary_2) {
-    
-    return(x)
-    
-  } else {
-    
-    return(boundary_1)
-    
-  }
-  
-}
-
-
-custom_round_up <- function(x, accuracy) {
-  
-  if (accuracy == 0) {
-    
-    return(0)
-    
-  } else {
-    
-    accuracy <- abs(accuracy)
-    
-  }
-  
-  boundary_1 <- floor(x / accuracy) * accuracy
-  boundary_2 <- ceiling(x / accuracy) * accuracy
-  
-  if (boundary_1 + accuracy <= x | boundary_2 - accuracy >= x | boundary_1 == boundary_2) {
-    
-    return(x)
-    
-  } else {
-    
-    return(boundary_2)
-    
-  }
-  
-}
-
-
-custom_round <- function(x, accuracy) {
-  
-  x_round_up <- custom_round_up(x, accuracy)
-  x_round_down <- custom_round_down(x, accuracy)
-  
-  if (abs(x - x_round_up) <= abs(x - x_round_down)) {
-    
-    return(x_round_up)
-    
-  } else {
-    
-    return(x_round_down)
-    
-  }
-  
-}
-
-
-
 # set paths ----
 
 # directory where data files are stored
 Directory_Data <- "data/"
-
-
 # subdirectory within `Directory_Data` where hospital data is stored
 Subdirectory_Data_Hospital <- "01_hospital/"
 
@@ -109,6 +29,7 @@ Path_Table_Days_Visits_Emergency_20200101_20230630_Anonymized <- paste0(Subdirec
 Path_Table_Days_Fever_20200101_20230630_Anonymized <- paste0(Subdirectory_Data_Hospital, "processed/table_days_fever_anonymized.csv")
 Path_Table_Days_Number_Patients_High_CRP_20200101_20230630_Anonymized <- paste0(Subdirectory_Data_Hospital, "processed/table_days_number_patients_high_crp_anonymized.csv")
 Path_Table_Days_ICD_Freq_Codes_Cat_Chap_Covid_20200101_20230630_Anonymized <- paste0(Subdirectory_Data_Hospital, "processed/table_days_icd_freq_codes_cat_chap_covid_anonymized.csv")
+
 
 # path of raw wastewater data
 Path_Data_Wastewater_Raw <- paste0(Subdirectory_Data_Wastewater, "raw/processed_normed_data_laupen_v2.csv")
@@ -163,5 +84,22 @@ Path_Grid_Combinations_kNp_Dates_Train_Test <- paste0(Subdirectory_Parameters_kN
 
 # general path within `Directory_Parameters` where grids of parameter combinations for model runs on UBELIX are stored
 Path_Grid_Combinations_Data_kNp_Dates_Hyp <- paste0(Subdirectory_Parameters_Job_Setup, "grid_combinations_data_kNp_dates_hyp_")
+
+
+
+# directory where plots are stored
+Directory_Plots <- "plots/"
+
+# subdirectory within `Directory_Plots` where plots of parameters are stored
+Subdirectory_Plots_Parameters <- "parameters/"
+
+# subdirectory within `Directory_Plots` where tables are stored
+Subdirectory_Plots_Tables <- "tables/"
+
+# subdirectory within `Directory_Plots` where plots for the manuscript are stored
+Subdirectory_Plots_Manuscript <- "manuscript/"
+
+# subdirectory within `Directory_Plots` where plots for the supplementary are stored
+Subdirectory_Plots_Supplementary <- "supplementary/"
 
 
