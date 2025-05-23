@@ -8,15 +8,15 @@ number_combination_features <- "006"
 
 
 # load data ----
-table_parameters_kNp <- read_csv(file = paste0(Directory_Parameters, Path_Table_Parameters_kNp))
+table_parameters_kNp <- read_csv(file = Path_Table_Parameters_kNp)
 
-table_dates_train_test_detailed <- read_csv(file = paste0(Directory_Parameters, Path_Table_Dates_Train_Test_Detailed))
+table_dates_train_test_detailed <- read_csv(file = Path_Table_Dates_Train_Test_Detailed)
 
-table_dates_train_test_overview <- read_csv(file = paste0(Directory_Parameters, Path_Table_Dates_Train_Test_Overview))
+table_dates_train_test_overview <- read_csv(file = Path_Table_Dates_Train_Test_Overview)
 
-table_days_icd_u07_1_20200101_20230630 <- read_csv(file = paste0(Directory_Data, Path_Table_Days_ICD_U07_1_20200101_20230630_Anonymized))
+table_days_icd_u07_1_20200101_20230630 <- read_csv(file = Path_Table_Days_ICD_U07_1_20200101_20230630)
 
-table_days_icd_codes <- read_csv(file = paste0(Directory_Data, Path_Table_Days_ICD_Freq_Codes_Cat_Chap_Covid_20200101_20230630_Anonymized)) %>%
+table_days_icd_codes <- read_csv(file = Path_Table_Days_ICD_Freq_Codes_Cat_Chap_Covid_20200101_20230630) %>%
   dplyr::select(c("date_day"), starts_with("icd10_code_"))
 
 
@@ -94,7 +94,11 @@ path_data_features_006_base <- get_path_data_features(directory_data = paste0(Di
                                                       number_combination_features = number_combination_features,
                                                       name_data_set = name_data_set)
 
-write_csv(x = data_features_006_base,
-          file = path_data_features_006_base)
+if (!(file.exists(path_data_features_006_base)) | Bool_Data_Processing_Do_New) {
+  
+  write_csv(x = data_features_006_base,
+            file = path_data_features_006_base)
+  
+}
 
 

@@ -239,7 +239,7 @@ data_text_extra_data <- tibble(x = rep(x = ymd("2019-06-15"), times = 19),
 
 # create plot: COVID-19 related hospital admissions ----
 plot_grid_hospital_admissions <- ggplot() +
-  geom_ridgeline(data = data_features %>% filter(color == "color_1"),
+  ggridges::geom_ridgeline(data = data_features %>% filter(color == "color_1"),
                  mapping = aes(x = date_day,
                                y = type,
                                height = value_scaled,
@@ -296,7 +296,7 @@ ggsave(plot = plot_grid_hospital_admissions,
 
 # create plot: extra data (emergency visits, icd10 codes, ...) ----
 plot_grid_extra_data <- ggplot() +
-  geom_ridgeline(data = data_features,
+  ggridges::geom_ridgeline(data = data_features,
                  mapping = aes(x = date_day,
                                y = type,
                                height = value_scaled,
@@ -370,7 +370,7 @@ ggsave(plot = plot_grid_extra_data,
 
 # create plot: COVID-19 related hospital admissions and extra data (emergency visits, icd10 codes, ...) ----
 plot_grid_hospital_admissions_extra_data <- ggplot() +
-  geom_ridgeline(data = data_features,
+  ggridges::geom_ridgeline(data = data_features,
                  mapping = aes(x = date_day,
                                y = type,
                                height = value_scaled,
@@ -449,11 +449,6 @@ ggsave(plot = plot_grid_hospital_admissions_extra_data,
 
 ggsave(plot = plot_grid_hospital_admissions_extra_data,
        filename = paste0(Directory_Plots, Subdirectory_Plots_Manuscript, "Figure_2.pdf"),
-       width = 7.3,
-       height = 8.7, units = c("in"), bg = "white")
-
-ggsave(plot = plot_grid_hospital_admissions_extra_data,
-       filename = paste0(Directory_Plots, Subdirectory_Plots_Presentation, "plot_grid_hospital_admissions_extra_data.png"),
        width = 7.3,
        height = 8.7, units = c("in"), bg = "white")
 

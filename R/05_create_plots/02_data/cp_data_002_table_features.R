@@ -289,7 +289,7 @@ data_summary_features_numeric <- data_summary_features_numeric %>%
                         unit = "Patients"))
 
 
-data_features_002 <- read_csv(file = get_path_data_features(directory_data = Directory_Data_Models,
+data_features_002 <- read_csv(file = get_path_data_features(directory_data = paste0(Directory_Data, Subdirectory_Data_Feature_sets),
                                                             number_xy = "001",
                                                             number_combination_features = "002",
                                                             name_data_set = "base",
@@ -307,7 +307,7 @@ data_summary_features_numeric <- data_summary_features_numeric %>%
                         unit = "Patients"))
 
 
-data_features_005 <- read_csv(file = get_path_data_features(directory_data = Directory_Data_Models,
+data_features_005 <- read_csv(file = get_path_data_features(directory_data = paste0(Directory_Data, Subdirectory_Data_Feature_sets),
                                                             number_xy = "001",
                                                             number_combination_features = "005",
                                                             name_data_set = "base",
@@ -332,7 +332,7 @@ data_summary_features_character <- data_summary_features_numeric %>%
          max = as.character(formatC(max, big.mark = ",", big.interval = 3, digits = 0, format = "f")))
 
 
-data_features_004 <- read_csv(file = get_path_data_features(directory_data = Directory_Data_Models,
+data_features_004 <- read_csv(file = get_path_data_features(directory_data = paste0(Directory_Data, Subdirectory_Data_Feature_sets),
                                                             number_xy = "001",
                                                             number_combination_features = "004",
                                                             name_data_set = "base",
@@ -423,8 +423,5 @@ flextable::save_as_image(x = table_data_summary_features,
 
 flextable::save_as_image(x = table_data_summary_features,
                          path = paste0(Directory_Plots, Subdirectory_Plots_Manuscript, "Table_1.png"))
-
-flextable::save_as_image(x = table_data_summary_features,
-                         path = paste0(Directory_Plots, Subdirectory_Plots_Presentation, "table_data_summary_features.png"))
 
 

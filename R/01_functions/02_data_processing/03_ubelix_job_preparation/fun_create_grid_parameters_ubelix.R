@@ -37,7 +37,7 @@ create_grid_parameters_ubelix <- function(number_job_array,
                                                                      Path_Grid_Combinations_kNp_Dates_Train_Test,
                                                                      number_grid_combinations_kNp_dates_train_test, ".csv"))
     
-    table_parameters_kNp <- read_csv(file = paste0(Directory_Parameters, Path_Table_Parameters_kNp))
+    table_parameters_kNp <- read_csv(file = Path_Table_Parameters_kNp)
     
     # modify `grid_combinations_kNp_dates_train_test`:
     # (a) left join `table_parameters_kNp`

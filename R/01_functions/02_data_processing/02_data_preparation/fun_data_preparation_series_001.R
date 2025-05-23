@@ -10,7 +10,7 @@ data_preparation_series_001 <- function(data_features,
                                         remove_x = FALSE,
                                         overwrite = FALSE) {
   
-  table_dates_train_test_overview <- read_csv(file = paste0(Directory_Parameters, Path_Table_Dates_Train_Test_Overview))
+  table_dates_train_test_overview <- read_csv(file = Path_Table_Dates_Train_Test_Overview)
   
   for (ii in 1:nrow(table_parameters_kNp)) {
     

@@ -8,13 +8,13 @@ number_combination_features <- "000"
 
 
 # load data ----
-table_parameters_kNp <- read_csv(file = paste0(Directory_Parameters, Path_Table_Parameters_kNp))
+table_parameters_kNp <- read_csv(file = Path_Table_Parameters_kNp)
 
-table_dates_train_test_detailed <- read_csv(file = paste0(Directory_Parameters, Path_Table_Dates_Train_Test_Detailed))
+table_dates_train_test_detailed <- read_csv(file = Path_Table_Dates_Train_Test_Detailed)
 
-table_dates_train_test_overview <- read_csv(file = paste0(Directory_Parameters, Path_Table_Dates_Train_Test_Overview))
+table_dates_train_test_overview <- read_csv(file = Path_Table_Dates_Train_Test_Overview)
 
-table_days_icd_u07_1_20200101_20230630 <- read_csv(file = paste0(Directory_Data, Path_Table_Days_ICD_U07_1_20200101_20230630_Anonymized))
+table_days_icd_u07_1_20200101_20230630 <- read_csv(file = Path_Table_Days_ICD_U07_1_20200101_20230630)
 
 
 
@@ -56,7 +56,7 @@ data_preparation_series_001(data_features = data_features_000_base,
                             table_parameters_kNp = table_parameters_kNp_filtered,
                             table_dates_train_test = table_dates_train_test_detailed_filtered,
                             remove_x = FALSE,
-                            overwrite = FALSE)
+                            overwrite = Bool_Data_Processing_Do_New)
 
 
 # `data_features_000_base`: add variable y (= y_{0,N} for all N present in `table_parameters_kNp`)
@@ -87,8 +87,12 @@ path_data_features_000_base <- get_path_data_features(directory_data = paste0(Di
                                                       number_combination_features = number_combination_features,
                                                       name_data_set = name_data_set)
 
+if (!(file.exists(path_data_features_000_base)) | Bool_Data_Processing_Do_New) {
+
 write_csv(x = data_features_000_base,
           file = path_data_features_000_base)
+
+}
 
 
 
@@ -138,7 +142,7 @@ data_preparation_series_001(data_features = data_features_000_age,
                             table_parameters_kNp = table_parameters_kNp_filtered,
                             table_dates_train_test = table_dates_train_test_detailed_filtered,
                             remove_x = FALSE,
-                            overwrite = FALSE)
+                            overwrite = Bool_Data_Processing_Do_New)
 
 
 # `data_features_000_age`: add variable y (= y_{0,N} for all N present in `table_parameters_kNp`)
@@ -169,7 +173,11 @@ path_data_features_000_age <- get_path_data_features(directory_data = paste0(Dir
                                                      number_combination_features = number_combination_features,
                                                      name_data_set = name_data_set)
 
-write_csv(x = data_features_000_age,
-          file = path_data_features_000_age)
+if (!(file.exists(path_data_features_000_age)) | Bool_Data_Processing_Do_New) {
+  
+  write_csv(x = data_features_000_age,
+            file = path_data_features_000_age)
+  
+}
 
 

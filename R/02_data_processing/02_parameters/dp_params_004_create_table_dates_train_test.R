@@ -9,7 +9,7 @@ table_dates_train_test_overview <- tribble(~group, ~n_periods,         ~date_min
                                             "006",          4, ymd("2021-11-16"), ymd("2023-06-30"))
 
 write_csv(x = table_dates_train_test_overview,
-          file = paste0(Directory_Parameters, Path_Table_Dates_Train_Test_Overview))
+          file = Path_Table_Dates_Train_Test_Overview)
 
 
 
