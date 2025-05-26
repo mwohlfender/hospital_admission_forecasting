@@ -1,6 +1,12 @@
 
 # define grids of combinations of values for hyperparameters
 
+# linear regression
+fun_create_grid_hyp_params_lr(number_hyp_par_grid = "001",
+                              n_iterations = 1,
+                              do_new = Bool_Define_Parameters_Do_New)
+
+
 # long short-term memory
 fun_create_grid_hyp_params_lstm(number_hyp_par_grid = "001",
                                 n_iterations = 50,

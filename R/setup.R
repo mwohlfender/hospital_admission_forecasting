@@ -15,7 +15,7 @@ library(stringr)
 # library(unibeCols) # yes
 # 
 # # data processing
-# library(data.table)
+library(data.table)
 # library(reshape)
 # 
 # # dates
@@ -25,7 +25,7 @@ library(lubridate)
 # library(sf)
 # 
 # # machine learning
-# library(stats)
+library(stats)
 library(Metrics)
 # # library(keras)
 # # library(tensorflow)

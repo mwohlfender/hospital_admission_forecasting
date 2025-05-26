@@ -8,11 +8,11 @@ number_combination_features <- "010"
 
 
 # load data ----
-table_parameters_kNp <- read_csv(file = Path_Table_Parameters_kNp)
+table_parameters_kNp <- read_csv(file = paste0(Directory_Parameters, Path_Table_Parameters_kNp))
 
-table_dates_train_test_detailed <- read_csv(file = Path_Table_Dates_Train_Test_Detailed)
+table_dates_train_test_detailed <- read_csv(file = paste0(Directory_Parameters, Path_Table_Dates_Train_Test_Detailed))
 
-table_dates_train_test_overview <- read_csv(file = Path_Table_Dates_Train_Test_Overview)
+table_dates_train_test_overview <- read_csv(file = paste0(Directory_Parameters, Path_Table_Dates_Train_Test_Overview))
 
 table_days_icd_u07_1_20200101_20230630 <- read_csv(file = Path_Table_Days_ICD_U07_1_20200101_20230630)
 

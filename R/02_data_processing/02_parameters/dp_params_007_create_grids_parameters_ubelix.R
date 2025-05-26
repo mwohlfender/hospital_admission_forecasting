@@ -3,6 +3,253 @@
 # define grids of input values to run models with different parameters in parallel on UBELIX
 
 
+# job array 005 ----
+
+create_grid_parameters_ubelix(number_job_array = "005",
+                              model = "lr",
+                              number_xy = "001",
+                              number_combination_features = "000",
+                              name_data_set = "base",
+                              number_grid_combinations_kNp_dates_train_test = "002",
+                              number_hyp_par_grid = "001",
+                              use_hyp_par_subgrids = FALSE)
+
+
+# job array 006 ----
+
+create_grid_parameters_ubelix(number_job_array = "006",
+                              model = "lr",
+                              number_xy = "001",
+                              number_combination_features = "000",
+                              name_data_set = "age",
+                              number_grid_combinations_kNp_dates_train_test = "002",
+                              number_hyp_par_grid = "001",
+                              use_hyp_par_subgrids = FALSE)
+
+
+# job array 007 ----
+
+create_grid_parameters_ubelix(number_job_array = "007",
+                              model = "lr",
+                              number_xy = "001",
+                              number_combination_features = "001",
+                              name_data_set = "base",
+                              number_grid_combinations_kNp_dates_train_test = "002",
+                              number_hyp_par_grid = "001",
+                              use_hyp_par_subgrids = FALSE)
+
+
+# job array 008 ----
+
+create_grid_parameters_ubelix(number_job_array = "008",
+                              model = "lr",
+                              number_xy = "001",
+                              number_combination_features = "002",
+                              name_data_set = "base",
+                              number_grid_combinations_kNp_dates_train_test = "002",
+                              number_hyp_par_grid = "001",
+                              use_hyp_par_subgrids = FALSE)
+
+
+# job array 009 ----
+
+create_grid_parameters_ubelix(number_job_array = "009",
+                              model = "lr",
+                              number_xy = "001",
+                              number_combination_features = "005",
+                              name_data_set = "base",
+                              number_grid_combinations_kNp_dates_train_test = "002",
+                              number_hyp_par_grid = "001",
+                              use_hyp_par_subgrids = FALSE)
+
+
+# job array 010 ----
+
+create_grid_parameters_ubelix(number_job_array = "010",
+                              model = "lr",
+                              number_xy = "001",
+                              number_combination_features = "006",
+                              name_data_set = "base",
+                              number_grid_combinations_kNp_dates_train_test = "002",
+                              number_hyp_par_grid = "001",
+                              use_hyp_par_subgrids = FALSE)
+
+# job array 011 ----
+
+create_grid_parameters_ubelix(number_job_array = "011",
+                              model = "lr",
+                              number_xy = "001",
+                              number_combination_features = "007",
+                              name_data_set = "base",
+                              number_grid_combinations_kNp_dates_train_test = "002",
+                              number_hyp_par_grid = "001",
+                              use_hyp_par_subgrids = FALSE)
+
+
+# job array 012 ----
+
+create_grid_parameters_ubelix(number_job_array = "012",
+                              model = "lr",
+                              number_xy = "001",
+                              number_combination_features = "008",
+                              name_data_set = "base",
+                              number_grid_combinations_kNp_dates_train_test = "002",
+                              number_hyp_par_grid = "001",
+                              use_hyp_par_subgrids = FALSE)
+
+
+# job array 013 ----
+
+create_grid_parameters_ubelix(number_job_array = "013",
+                              model = "lr",
+                              number_xy = "001",
+                              number_combination_features = "010",
+                              name_data_set = "base",
+                              number_grid_combinations_kNp_dates_train_test = "002",
+                              number_hyp_par_grid = "001",
+                              use_hyp_par_subgrids = FALSE)
+
+# job array 014 ----
+
+create_grid_parameters_ubelix(number_job_array = "014",
+                              model = "lr",
+                              number_xy = "001",
+                              number_combination_features = "000",
+                              name_data_set = "base",
+                              number_grid_combinations_kNp_dates_train_test = "003",
+                              number_hyp_par_grid = "001",
+                              use_hyp_par_subgrids = FALSE)
+
+
+# job array 015 ----
+
+create_grid_parameters_ubelix(number_job_array = "015",
+                              model = "lr",
+                              number_xy = "001",
+                              number_combination_features = "000",
+                              name_data_set = "age",
+                              number_grid_combinations_kNp_dates_train_test = "003",
+                              number_hyp_par_grid = "001",
+                              use_hyp_par_subgrids = FALSE)
+
+
+# job array 016 ----
+
+create_grid_parameters_ubelix(number_job_array = "016",
+                              model = "lr",
+                              number_xy = "001",
+                              number_combination_features = "001",
+                              name_data_set = "base",
+                              number_grid_combinations_kNp_dates_train_test = "003",
+                              number_hyp_par_grid = "001",
+                              use_hyp_par_subgrids = FALSE)
+
+# job array 017 ----
+
+create_grid_parameters_ubelix(number_job_array = "017",
+                              model = "lr",
+                              number_xy = "001",
+                              number_combination_features = "002",
+                              name_data_set = "base",
+                              number_grid_combinations_kNp_dates_train_test = "003",
+                              number_hyp_par_grid = "001",
+                              use_hyp_par_subgrids = FALSE)
+
+
+# job array 018 ----
+
+create_grid_parameters_ubelix(number_job_array = "018",
+                              model = "lr",
+                              number_xy = "001",
+                              number_combination_features = "003",
+                              name_data_set = "base",
+                              number_grid_combinations_kNp_dates_train_test = "003",
+                              number_hyp_par_grid = "001",
+                              use_hyp_par_subgrids = FALSE)
+
+
+# job array 019 ----
+
+create_grid_parameters_ubelix(number_job_array = "019",
+                              model = "lr",
+                              number_xy = "001",
+                              number_combination_features = "004",
+                              name_data_set = "base",
+                              number_grid_combinations_kNp_dates_train_test = "003",
+                              number_hyp_par_grid = "001",
+                              use_hyp_par_subgrids = FALSE)
+
+# job array 020 ----
+
+create_grid_parameters_ubelix(number_job_array = "020",
+                              model = "lr",
+                              number_xy = "001",
+                              number_combination_features = "005",
+                              name_data_set = "base",
+                              number_grid_combinations_kNp_dates_train_test = "003",
+                              number_hyp_par_grid = "001",
+                              use_hyp_par_subgrids = FALSE)
+
+
+# job array 021 ----
+
+create_grid_parameters_ubelix(number_job_array = "021",
+                              model = "lr",
+                              number_xy = "001",
+                              number_combination_features = "006",
+                              name_data_set = "base",
+                              number_grid_combinations_kNp_dates_train_test = "003",
+                              number_hyp_par_grid = "001",
+                              use_hyp_par_subgrids = FALSE)
+
+
+# job array 022 ----
+
+create_grid_parameters_ubelix(number_job_array = "022",
+                              model = "lr",
+                              number_xy = "001",
+                              number_combination_features = "007",
+                              name_data_set = "base",
+                              number_grid_combinations_kNp_dates_train_test = "003",
+                              number_hyp_par_grid = "001",
+                              use_hyp_par_subgrids = FALSE)
+
+# job array 023 ----
+
+create_grid_parameters_ubelix(number_job_array = "023",
+                              model = "lr",
+                              number_xy = "001",
+                              number_combination_features = "008",
+                              name_data_set = "base",
+                              number_grid_combinations_kNp_dates_train_test = "003",
+                              number_hyp_par_grid = "001",
+                              use_hyp_par_subgrids = FALSE)
+
+
+# job array 024 ----
+
+create_grid_parameters_ubelix(number_job_array = "024",
+                              model = "lr",
+                              number_xy = "001",
+                              number_combination_features = "009",
+                              name_data_set = "base",
+                              number_grid_combinations_kNp_dates_train_test = "003",
+                              number_hyp_par_grid = "001",
+                              use_hyp_par_subgrids = FALSE)
+
+
+# job array 025 ----
+
+create_grid_parameters_ubelix(number_job_array = "025",
+                              model = "lr",
+                              number_xy = "001",
+                              number_combination_features = "010",
+                              name_data_set = "base",
+                              number_grid_combinations_kNp_dates_train_test = "003",
+                              number_hyp_par_grid = "001",
+                              use_hyp_par_subgrids = FALSE)
+
+
 # job array 026 ----
 
 create_grid_parameters_ubelix(number_job_array = "026",

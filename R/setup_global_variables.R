@@ -11,6 +11,11 @@ Bool_Create_Plots_Do_New <- FALSE
 
 # set paths ----
 
+# directory where files of computing jobs done on UBELIX are stored (NEEDS TO BE ADJUSTED)
+Directory_Ubelix <- "DIRECTORY/"
+
+
+
 # directory where data files are stored
 Directory_Data <- "data/"
 
@@ -84,28 +89,28 @@ Subdirectory_Parameters_Hyperparameters <- "04_hyperparameters/"
 Subdirectory_Parameters_Job_Setup <- "05_job_setup/"
 
 
-# path where overview of models is stored
-Path_Overview_Table_Models <- paste0(Directory_Parameters, Subdirectory_Parameters_Models, "01_overview_table_models.csv")
+# path within `Directory_Parameters` where overview of models is stored
+Path_Overview_Table_Models <- paste0(Subdirectory_Parameters_Models, "01_overview_table_models.csv")
 
-# # path where overview of data sets is stored
-Path_Overview_Table_Datasets <- paste0(Directory_Parameters, Subdirectory_Parameters_Datasets, "01_overview_table_datasets.csv")
+# path within `Directory_Parameters` where overview of data sets is stored
+Path_Overview_Table_Datasets <- paste0(Subdirectory_Parameters_Datasets, "01_overview_table_datasets.csv")
 
-# path where table of parameters (k, N and p) is stored
-Path_Table_Parameters_kNp <- paste0(Directory_Parameters, Subdirectory_Parameters_kNp_Dates_Train_Test, "01_table_parameters_kNp.csv")
+# path within `Directory_Parameters` where table of parameters (k, N and p) is stored
+Path_Table_Parameters_kNp <- paste0(Subdirectory_Parameters_kNp_Dates_Train_Test, "01_table_parameters_kNp.csv")
 
-# path where overview table of dates (date_min_train, date_max_train, date_min_test and date_max_test) is stored
-Path_Table_Dates_Train_Test_Overview <- paste0(Directory_Parameters, Subdirectory_Parameters_kNp_Dates_Train_Test, "02_table_dates_train_test_overview.csv")
+# path within `Directory_Parameters` where overview table of dates (date_min_train, date_max_train, date_min_test and date_max_test) is stored
+Path_Table_Dates_Train_Test_Overview <- paste0(Subdirectory_Parameters_kNp_Dates_Train_Test, "02_table_dates_train_test_overview.csv")
 
-# path  where table of dates (date_min_train, date_max_train, date_min_test and date_max_test) is stored
-Path_Table_Dates_Train_Test_Detailed <- paste0(Directory_Parameters, Subdirectory_Parameters_kNp_Dates_Train_Test, "03_table_dates_train_test_details.csv")
+# path within `Directory_Parameters` where table of dates (date_min_train, date_max_train, date_min_test and date_max_test) is stored
+Path_Table_Dates_Train_Test_Detailed <- paste0(Subdirectory_Parameters_kNp_Dates_Train_Test, "03_table_dates_train_test_details.csv")
 
-# general path where grids of parameter combinations
+# general path within `Directory_Parameters` where grids of parameter combinations
 # (parameters k, N and p and dates date_min_train, date_max_train, date_min_test and date_max_test) are stored
-Path_Grid_Combinations_kNp_Dates_Train_Test <- paste0(Directory_Parameters, Subdirectory_Parameters_kNp_Dates_Train_Test,
+Path_Grid_Combinations_kNp_Dates_Train_Test <- paste0(Subdirectory_Parameters_kNp_Dates_Train_Test,
                                                       Subsubdirectory_Parameters_kNp_Dates_Train_Test_Grids, "grid_combinations_kNp_dates_train_test_")
 
-# general path where grids of parameter combinations for model runs on UBELIX are stored
-Path_Grid_Combinations_Data_kNp_Dates_Hyp <- paste0(Directory_Parameters, Subdirectory_Parameters_Job_Setup, "grid_combinations_data_kNp_dates_hyp_")
+# general path within `Directory_Parameters` where grids of parameter combinations for model runs on UBELIX are stored
+Path_Grid_Combinations_Data_kNp_Dates_Hyp <- paste0(Subdirectory_Parameters_Job_Setup, "grid_combinations_data_kNp_dates_hyp_")
 
 
 

@@ -5,8 +5,8 @@
 
 
 # read data defining train-test splits
-table_dates_train_test_overview <- read_csv(file = Path_Table_Dates_Train_Test_Overview)
-table_dates_train_test_detailed <- read_csv(file = Path_Table_Dates_Train_Test_Detailed)
+table_dates_train_test_overview <- read_csv(file = paste0(Directory_Parameters, Path_Table_Dates_Train_Test_Overview))
+table_dates_train_test_detailed <- read_csv(file = paste0(Directory_Parameters, Path_Table_Dates_Train_Test_Detailed))
 
 # read time series of COVID-19-related hospital admissions
 data_features_001_000_base <- read_csv(file = get_path_data_features(directory_data = paste0(Directory_Data, Subdirectory_Data_Feature_sets),

@@ -34,11 +34,11 @@ apply_model_locf <- function(number_xy,
                                                                      number_combination_features = "000",
                                                                      name_data_set = "base"))
     
-    table_parameters_kNp <- read_csv(file = Path_Table_Parameters_kNp)
+    table_parameters_kNp <- read_csv(file = paste0(Directory_Parameters, Path_Table_Parameters_kNp))
     
-    table_dates_train_test_detailed <- read_csv(file = Path_Table_Dates_Train_Test_Detailed)
+    table_dates_train_test_detailed <- read_csv(file = paste0(Directory_Parameters, Path_Table_Dates_Train_Test_Detailed))
     
-    grid_combinations_kNp_dates_train_test <- read_csv(file = paste0(Path_Grid_Combinations_kNp_Dates_Train_Test,
+    grid_combinations_kNp_dates_train_test <- read_csv(file = paste0(Directory_Parameters, Path_Grid_Combinations_kNp_Dates_Train_Test,
                                                                      number_grid_combinations_kNp_dates_train_test, ".csv"))
     
     

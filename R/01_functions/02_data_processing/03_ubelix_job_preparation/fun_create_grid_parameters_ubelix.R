@@ -13,10 +13,10 @@
 
 # Output:
 # (a) Grid of combinations of parameters (k, N and p) and train-test splits supplemented by information which model, data and hyperparameters shall be used,
-# is stored in `Directory_Parameters`/`Path_Grid_Combinations_Data_kNp_Dates_Hyp``number_job_array`.csv.
+# is stored in `Path_Grid_Combinations_Data_kNp_Dates_Hyp``number_job_array`.csv.
 # The grid has twelve columns: number_xy, number_combination_features, name_data_set, number_grid_combinations_kNp_dates_train_test, 
 # number_combination_kNp, k, N, p, group_dates_train_test, number_dates_train_test, number_hyp_par_grid and number_hyp_par_subgrid
-# (b) List of indices of jobs in array, is stored in `Directory_Parameters`/`Path_Grid_Combinations_Data_kNp_Dates_Hyp`indices_`number_job_array`.txt.
+# (b) List of indices of jobs in array, is stored in `Path_Grid_Combinations_Data_kNp_Dates_Hyp`indices_`number_job_array`.txt.
 create_grid_parameters_ubelix <- function(number_job_array,
                                           model,
                                           number_xy,
@@ -33,11 +33,10 @@ create_grid_parameters_ubelix <- function(number_job_array,
   
   if (!(file.exists(path_output_grid_combinations_data_kNp_dates_hyp)) | !(file.exists(path_output_indices)) | do_new) {
     
-    grid_combinations_kNp_dates_train_test <- read_csv(file = paste0(Directory_Parameters,
-                                                                     Path_Grid_Combinations_kNp_Dates_Train_Test,
+    grid_combinations_kNp_dates_train_test <- read_csv(file = paste0(Directory_Parameters, Path_Grid_Combinations_kNp_Dates_Train_Test,
                                                                      number_grid_combinations_kNp_dates_train_test, ".csv"))
     
-    table_parameters_kNp <- read_csv(file = Path_Table_Parameters_kNp)
+    table_parameters_kNp <- read_csv(file = paste0(Directory_Parameters, Path_Table_Parameters_kNp))
     
     # modify `grid_combinations_kNp_dates_train_test`:
     # (a) left join `table_parameters_kNp`
