@@ -17,10 +17,10 @@
 # Output: Grid and subgrids of at most `size_limit_subgrids` elements of all combinations of elements of range 1 to `n_iterations`,
 # `nneurons_one_range`, `nneurons_two_range`, `act_function_one_range`, `act_function_two_range`,
 # `optimizer_range`, `learning_rate_range`, `loss_function_range` and `nepochs_range`
-# is stored in `Directory_Parameters`/`Subdirectory_Parameters_Hyperparameters`/rnn/hyp_par_nn_`number_hyp_par_grid`_param_grid.csv.
+# is stored in `Directory_Parameters`/`Subdirectory_Parameters_Hyperparameters`/rnn/hyp_par_rnn_`number_hyp_par_grid`_param_grid.csv.
 # The grid has ten columns: iteration, nlayers, nneurons_one, nneurons_two, act_function_one, act_function_two,
 # optimizer, learning_rate, loss_function and nepochs
-fun_create_grid_hyp_params_nn <- function(number_hyp_par_grid,
+fun_create_grid_hyp_params_rnn <- function(number_hyp_par_grid,
                                           n_iterations,
                                           size_limit_subgrids,
                                           nneurons_one_range,
@@ -35,12 +35,12 @@ fun_create_grid_hyp_params_nn <- function(number_hyp_par_grid,
   
   # determine path of output
   path_output_parameter_grid <- paste0(Directory_Parameters, Subdirectory_Parameters_Hyperparameters, "rnn/", str_pad(number_hyp_par_grid, 3, pad = "0"),
-                                       "/hyp_par_nn_", str_pad(number_hyp_par_grid, 3, pad = "0"), "_param_grid.csv")
+                                       "/hyp_par_rnn_", str_pad(number_hyp_par_grid, 3, pad = "0"), "_param_grid.csv")
   
   if (!(file.exists(path_output_parameter_grid)) | do_new) {
     
     # create parameter grid
-    parameters_grid_nn_1 <- expand.grid(iteration = 1:n_iterations,
+    parameters_grid_rnn_1 <- expand.grid(iteration = 1:n_iterations,
                                         nlayers = 1,
                                         nneurons_one = nneurons_one_range,
                                         nneurons_two = 0,
@@ -51,7 +51,7 @@ fun_create_grid_hyp_params_nn <- function(number_hyp_par_grid,
                                         loss_function = loss_function_range,
                                         nepochs = nepochs_range)
     
-    parameters_grid_nn_2 <- expand.grid(iteration = 1:n_iterations,
+    parameters_grid_rnn_2 <- expand.grid(iteration = 1:n_iterations,
                                         nlayers = 2,
                                         nneurons_one = nneurons_one_range,
                                         nneurons_two = nneurons_two_range,
@@ -62,7 +62,7 @@ fun_create_grid_hyp_params_nn <- function(number_hyp_par_grid,
                                         loss_function = loss_function_range,
                                         nepochs = nepochs_range)
     
-    parameters_grid_nn <- rbind(parameters_grid_nn_1, parameters_grid_nn_2)
+    parameters_grid_rnn <- rbind(parameters_grid_rnn_1, parameters_grid_rnn_2)
     
     # create directory to store output (if it does not already exist)
     if (!(file.exists(paste0(Directory_Parameters, Subdirectory_Parameters_Hyperparameters, "rnn/", number_hyp_par_grid)))) {
@@ -79,25 +79,25 @@ fun_create_grid_hyp_params_nn <- function(number_hyp_par_grid,
       
     }
     
-    # write `parameters_grid_nn` to a csv file
-    write_csv(x = parameters_grid_nn,
+    # write `parameters_grid_rnn` to a csv file
+    write_csv(x = parameters_grid_rnn,
               file = path_output_parameter_grid)
     
     index <- 1
     
-    # split `parameters_grid_nn` to smaller grids if `parameters_grid_nn` has more than `size_limit_subgrids` lines
-    if (nrow(parameters_grid_nn) > size_limit_subgrids) {
+    # split `parameters_grid_rnn` to smaller grids if `parameters_grid_rnn` has more than `size_limit_subgrids` lines
+    if (nrow(parameters_grid_rnn) > size_limit_subgrids) {
       
       for (iteration_0 in 1:n_iterations) {
         
-        parameters_grid_nn_split <- parameters_grid_nn %>%
+        parameters_grid_rnn_split <- parameters_grid_rnn %>%
           filter(iteration == iteration_0)
         
-        if (nrow(parameters_grid_nn_split) <= size_limit_subgrids) {
+        if (nrow(parameters_grid_rnn_split) <= size_limit_subgrids) {
           
-          write_csv(x = parameters_grid_nn_split,
+          write_csv(x = parameters_grid_rnn_split,
                     file = paste0(Directory_Parameters, Subdirectory_Parameters_Hyperparameters, "rnn/", str_pad(number_hyp_par_grid, 3, pad = "0"),
-                                  "/hyp_par_nn_", str_pad(number_hyp_par_grid, 3, pad = "0"), "_param_grid_", index, ".csv"))
+                                  "/hyp_par_rnn_", str_pad(number_hyp_par_grid, 3, pad = "0"), "_param_grid_", index, ".csv"))
           
           index <- index + 1
           
@@ -105,15 +105,15 @@ fun_create_grid_hyp_params_nn <- function(number_hyp_par_grid,
           
           for (nneurons_one_0 in nneurons_one_range) {
             
-            parameters_grid_nn_split <- parameters_grid_nn %>%
+            parameters_grid_rnn_split <- parameters_grid_rnn %>%
               filter(iteration == iteration_0,
                      nneurons_one == nneurons_one_0)
             
-            if (nrow(parameters_grid_nn_split) <= size_limit_subgrids) {
+            if (nrow(parameters_grid_rnn_split) <= size_limit_subgrids) {
               
-              write_csv(x = parameters_grid_nn_split,
+              write_csv(x = parameters_grid_rnn_split,
                         file = paste0(Directory_Parameters, Subdirectory_Parameters_Hyperparameters, "rnn/", str_pad(number_hyp_par_grid, 3, pad = "0"),
-                                      "/hyp_par_nn_", str_pad(number_hyp_par_grid, 3, pad = "0"), "_param_grid_", index, ".csv"))
+                                      "/hyp_par_rnn_", str_pad(number_hyp_par_grid, 3, pad = "0"), "_param_grid_", index, ".csv"))
               
               index <- index + 1
               
@@ -121,16 +121,16 @@ fun_create_grid_hyp_params_nn <- function(number_hyp_par_grid,
               
               for (act_function_one_0 in act_function_one_range) {
                 
-                parameters_grid_nn_split <- parameters_grid_nn %>%
+                parameters_grid_rnn_split <- parameters_grid_rnn %>%
                   filter(iteration == iteration_0,
                          nneurons_one == nneurons_one_0,
                          act_function_one == act_function_one_0)
                 
-                if (nrow(parameters_grid_nn_split) <= size_limit_subgrids) {
+                if (nrow(parameters_grid_rnn_split) <= size_limit_subgrids) {
                   
-                  write_csv(x = parameters_grid_nn_split,
+                  write_csv(x = parameters_grid_rnn_split,
                             file = paste0(Directory_Parameters, Subdirectory_Parameters_Hyperparameters, "rnn/", str_pad(number_hyp_par_grid, 3, pad = "0"),
-                                          "/hyp_par_nn_", str_pad(number_hyp_par_grid, 3, pad = "0"), "_param_grid_", index, ".csv"))
+                                          "/hyp_par_rnn_", str_pad(number_hyp_par_grid, 3, pad = "0"), "_param_grid_", index, ".csv"))
                   
                   index <- index + 1
                   
@@ -138,17 +138,17 @@ fun_create_grid_hyp_params_nn <- function(number_hyp_par_grid,
                   
                   for (optimizer_0 in optimizer_range) {
                     
-                    parameters_grid_nn_split <- parameters_grid_nn %>%
+                    parameters_grid_rnn_split <- parameters_grid_rnn %>%
                       filter(iteration == iteration_0,
                              nneurons_one == nneurons_one_0,
                              act_function_one == act_function_one_0,
                              optimizer == optimizer_0)
                     
-                    if (nrow(parameters_grid_nn_split) <= size_limit_subgrids) {
+                    if (nrow(parameters_grid_rnn_split) <= size_limit_subgrids) {
                       
-                      write_csv(x = parameters_grid_nn_split,
+                      write_csv(x = parameters_grid_rnn_split,
                                 file = paste0(Directory_Parameters, Subdirectory_Parameters_Hyperparameters, "rnn/", str_pad(number_hyp_par_grid, 3, pad = "0"),
-                                              "/hyp_par_nn_", str_pad(number_hyp_par_grid, 3, pad = "0"), "_param_grid_", index, ".csv"))
+                                              "/hyp_par_rnn_", str_pad(number_hyp_par_grid, 3, pad = "0"), "_param_grid_", index, ".csv"))
                       
                       index <- index + 1
                       
@@ -156,18 +156,18 @@ fun_create_grid_hyp_params_nn <- function(number_hyp_par_grid,
                       
                       for (learning_rate_0 in learning_rate_range) {
                         
-                        parameters_grid_nn_split <- parameters_grid_nn %>%
+                        parameters_grid_rnn_split <- parameters_grid_rnn %>%
                           filter(iteration == iteration_0,
                                  nneurons_one == nneurons_one_0,
                                  act_function_one == act_function_one_0,
                                  optimizer == optimizer_0,
                                  learning_rate == learning_rate_0)
                         
-                        if (nrow(parameters_grid_nn_split) <= size_limit_subgrids) {
+                        if (nrow(parameters_grid_rnn_split) <= size_limit_subgrids) {
                           
-                          write_csv(x = parameters_grid_nn_split,
+                          write_csv(x = parameters_grid_rnn_split,
                                     file = paste0(Directory_Parameters, Subdirectory_Parameters_Hyperparameters, "rnn/", str_pad(number_hyp_par_grid, 3, pad = "0"),
-                                                  "/hyp_par_nn_", str_pad(number_hyp_par_grid, 3, pad = "0"), "_param_grid_", index, ".csv"))
+                                                  "/hyp_par_rnn_", str_pad(number_hyp_par_grid, 3, pad = "0"), "_param_grid_", index, ".csv"))
                           
                           index <- index + 1
                           
@@ -175,7 +175,7 @@ fun_create_grid_hyp_params_nn <- function(number_hyp_par_grid,
                           
                           for (loss_function_0 in loss_function_range) {
                             
-                            parameters_grid_nn_split <- parameters_grid_nn %>%
+                            parameters_grid_rnn_split <- parameters_grid_rnn %>%
                               filter(iteration == iteration_0,
                                      nneurons_one == nneurons_one_0,
                                      act_function_one == act_function_one_0,
@@ -183,11 +183,11 @@ fun_create_grid_hyp_params_nn <- function(number_hyp_par_grid,
                                      learning_rate == learning_rate_0,
                                      loss_function == loss_function_0)
                             
-                            if (nrow(parameters_grid_nn_split) <= size_limit_subgrids) {
+                            if (nrow(parameters_grid_rnn_split) <= size_limit_subgrids) {
                               
-                              write_csv(x = parameters_grid_nn_split,
+                              write_csv(x = parameters_grid_rnn_split,
                                         file = paste0(Directory_Parameters, Subdirectory_Parameters_Hyperparameters, "rnn/", str_pad(number_hyp_par_grid, 3, pad = "0"),
-                                                      "/hyp_par_nn_", str_pad(number_hyp_par_grid, 3, pad = "0"), "_param_grid_", index, ".csv"))
+                                                      "/hyp_par_rnn_", str_pad(number_hyp_par_grid, 3, pad = "0"), "_param_grid_", index, ".csv"))
                               
                               index <- index + 1
                               
@@ -195,7 +195,7 @@ fun_create_grid_hyp_params_nn <- function(number_hyp_par_grid,
                               
                               for (nepochs_0 in nepochs_range) {
                                 
-                                parameters_grid_nn_split <- parameters_grid_nn %>%
+                                parameters_grid_rnn_split <- parameters_grid_rnn %>%
                                   filter(iteration == iteration_0,
                                          nneurons_one == nneurons_one_0,
                                          act_function_one == act_function_one_0,
@@ -204,9 +204,9 @@ fun_create_grid_hyp_params_nn <- function(number_hyp_par_grid,
                                          loss_function == loss_function_0,
                                          nepochs == nepochs_0)
                                 
-                                write_csv(x = parameters_grid_nn_split,
+                                write_csv(x = parameters_grid_rnn_split,
                                           file = paste0(Directory_Parameters, Subdirectory_Parameters_Hyperparameters, "rnn/", str_pad(number_hyp_par_grid, 3, pad = "0"),
-                                                        "/hyp_par_nn_", str_pad(number_hyp_par_grid, 3, pad = "0"), "_param_grid_", index, ".csv"))
+                                                        "/hyp_par_rnn_", str_pad(number_hyp_par_grid, 3, pad = "0"), "_param_grid_", index, ".csv"))
                                 
                                 index <- index + 1
                                 

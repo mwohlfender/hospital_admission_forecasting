@@ -325,7 +325,7 @@ create_grid_parameters_ubelix(number_job_array = "031",
 # job array 032 ----
 
 create_grid_parameters_ubelix(number_job_array = "032",
-                              model = "nn",
+                              model = "rnn",
                               number_xy = "001",
                               number_combination_features = "000",
                               name_data_set = "base",
@@ -337,7 +337,7 @@ create_grid_parameters_ubelix(number_job_array = "032",
 # job array 033 ----
 
 create_grid_parameters_ubelix(number_job_array = "033",
-                              model = "nn",
+                              model = "rnn",
                               number_xy = "001",
                               number_combination_features = "000",
                               name_data_set = "age",
@@ -349,7 +349,7 @@ create_grid_parameters_ubelix(number_job_array = "033",
 # job array 034 ----
 
 create_grid_parameters_ubelix(number_job_array = "034",
-                              model = "nn",
+                              model = "rnn",
                               number_xy = "001",
                               number_combination_features = "001",
                               name_data_set = "base",
@@ -361,7 +361,7 @@ create_grid_parameters_ubelix(number_job_array = "034",
 # job array 035 ----
 
 create_grid_parameters_ubelix(number_job_array = "035",
-                              model = "nn",
+                              model = "rnn",
                               number_xy = "001",
                               number_combination_features = "002",
                               name_data_set = "base",
@@ -373,7 +373,7 @@ create_grid_parameters_ubelix(number_job_array = "035",
 # job array 036 ----
 
 create_grid_parameters_ubelix(number_job_array = "036",
-                              model = "nn",
+                              model = "rnn",
                               number_xy = "001",
                               number_combination_features = "003",
                               name_data_set = "base",
@@ -385,7 +385,7 @@ create_grid_parameters_ubelix(number_job_array = "036",
 # job array 037 ----
 
 create_grid_parameters_ubelix(number_job_array = "037",
-                              model = "nn",
+                              model = "rnn",
                               number_xy = "001",
                               number_combination_features = "004",
                               name_data_set = "base",
@@ -541,7 +541,7 @@ create_grid_parameters_ubelix(number_job_array = "049",
 # job array 050 ----
 
 create_grid_parameters_ubelix(number_job_array = "050",
-                              model = "nn",
+                              model = "rnn",
                               number_xy = "001",
                               number_combination_features = "005",
                               name_data_set = "base",
@@ -649,7 +649,7 @@ create_grid_parameters_ubelix(number_job_array = "058",
 # job array 059 ----
 
 create_grid_parameters_ubelix(number_job_array = "059",
-                              model = "nn",
+                              model = "rnn",
                               number_xy = "001",
                               number_combination_features = "006",
                               name_data_set = "base",
@@ -661,7 +661,7 @@ create_grid_parameters_ubelix(number_job_array = "059",
 # job array 060 ----
 
 create_grid_parameters_ubelix(number_job_array = "060",
-                              model = "nn",
+                              model = "rnn",
                               number_xy = "001",
                               number_combination_features = "007",
                               name_data_set = "base",
@@ -673,7 +673,7 @@ create_grid_parameters_ubelix(number_job_array = "060",
 # job array 061 ----
 
 create_grid_parameters_ubelix(number_job_array = "061",
-                              model = "nn",
+                              model = "rnn",
                               number_xy = "001",
                               number_combination_features = "008",
                               name_data_set = "base",
@@ -685,7 +685,7 @@ create_grid_parameters_ubelix(number_job_array = "061",
 # job array 062 ----
 
 create_grid_parameters_ubelix(number_job_array = "062",
-                              model = "nn",
+                              model = "rnn",
                               number_xy = "001",
                               number_combination_features = "009",
                               name_data_set = "base",
@@ -697,7 +697,7 @@ create_grid_parameters_ubelix(number_job_array = "062",
 # job array 063 ----
 
 create_grid_parameters_ubelix(number_job_array = "063",
-                              model = "nn",
+                              model = "rnn",
                               number_xy = "001",
                               number_combination_features = "000",
                               name_data_set = "base",
@@ -709,7 +709,7 @@ create_grid_parameters_ubelix(number_job_array = "063",
 # job array 064 ----
 
 create_grid_parameters_ubelix(number_job_array = "064",
-                              model = "nn",
+                              model = "rnn",
                               number_xy = "001",
                               number_combination_features = "000",
                               name_data_set = "age",
@@ -721,7 +721,7 @@ create_grid_parameters_ubelix(number_job_array = "064",
 # job array 065 ----
 
 create_grid_parameters_ubelix(number_job_array = "065",
-                              model = "nn",
+                              model = "rnn",
                               number_xy = "001",
                               number_combination_features = "001",
                               name_data_set = "base",
@@ -733,7 +733,7 @@ create_grid_parameters_ubelix(number_job_array = "065",
 # job array 066 ----
 
 create_grid_parameters_ubelix(number_job_array = "066",
-                              model = "nn",
+                              model = "rnn",
                               number_xy = "001",
                               number_combination_features = "002",
                               name_data_set = "base",
@@ -841,7 +841,7 @@ create_grid_parameters_ubelix(number_job_array = "074",
 # job array 075 ----
 
 create_grid_parameters_ubelix(number_job_array = "075",
-                              model = "nn",
+                              model = "rnn",
                               number_xy = "001",
                               number_combination_features = "005",
                               name_data_set = "base",
@@ -853,7 +853,7 @@ create_grid_parameters_ubelix(number_job_array = "075",
 # job array 076 ----
 
 create_grid_parameters_ubelix(number_job_array = "076",
-                              model = "nn",
+                              model = "rnn",
                               number_xy = "001",
                               number_combination_features = "006",
                               name_data_set = "base",
@@ -865,7 +865,7 @@ create_grid_parameters_ubelix(number_job_array = "076",
 # job array 077 ----
 
 create_grid_parameters_ubelix(number_job_array = "077",
-                              model = "nn",
+                              model = "rnn",
                               number_xy = "001",
                               number_combination_features = "007",
                               name_data_set = "base",
@@ -877,7 +877,7 @@ create_grid_parameters_ubelix(number_job_array = "077",
 # job array 078 ----
 
 create_grid_parameters_ubelix(number_job_array = "078",
-                              model = "nn",
+                              model = "rnn",
                               number_xy = "001",
                               number_combination_features = "008",
                               name_data_set = "base",
@@ -937,7 +937,7 @@ create_grid_parameters_ubelix(number_job_array = "082",
 # job array 083 ----
 
 create_grid_parameters_ubelix(number_job_array = "083",
-                              model = "nn",
+                              model = "rnn",
                               number_xy = "001",
                               number_combination_features = "010",
                               name_data_set = "base",
@@ -973,7 +973,7 @@ create_grid_parameters_ubelix(number_job_array = "085",
 # job array 086 ----
 
 create_grid_parameters_ubelix(number_job_array = "086",
-                              model = "nn",
+                              model = "rnn",
                               number_xy = "001",
                               number_combination_features = "010",
                               name_data_set = "base",

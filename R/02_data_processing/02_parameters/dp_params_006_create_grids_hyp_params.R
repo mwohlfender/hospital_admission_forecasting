@@ -22,17 +22,17 @@ fun_create_grid_hyp_params_lstm(number_hyp_par_grid = "001",
 
 
 # recurrent neural network
-fun_create_grid_hyp_params_nn(number_hyp_par_grid = "003",
-                              n_iterations = 50,
-                              size_limit_subgrids = 144,
-                              nneurons_one_range = c(16, 32, 64),
-                              nneurons_two_range = c(8, 16, 32),
-                              act_function_one_range = c("relu"),
-                              act_function_two_range = c("relu"),
-                              optimizer_range = c("adam"),
-                              learning_rate_range = c(0.0005, 0.001, 0.002, 0.005),
-                              loss_function_range = c("mse"),
-                              nepochs_range = c(10, 25, 50))
+fun_create_grid_hyp_params_rnn(number_hyp_par_grid = "003",
+                               n_iterations = 50,
+                               size_limit_subgrids = 144,
+                               nneurons_one_range = c(16, 32, 64),
+                               nneurons_two_range = c(8, 16, 32),
+                               act_function_one_range = c("relu"),
+                               act_function_two_range = c("relu"),
+                               optimizer_range = c("adam"),
+                               learning_rate_range = c(0.0005, 0.001, 0.002, 0.005),
+                               loss_function_range = c("mse"),
+                               nepochs_range = c(10, 25, 50))
 
 
 # xgboost

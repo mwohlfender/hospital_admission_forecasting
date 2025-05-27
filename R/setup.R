@@ -32,8 +32,8 @@ library(Metrics)
 # library(xgboost)
 # 
 # # python
-# library(reticulate)
-# 
+library(reticulate)
+
 # # rounding
 # library(scrutiny)
 # 
@@ -59,10 +59,10 @@ library(scales)
 
 
 
-# # set up python environment ----
-# use_python("C:/Users/mw22f082/AppData/Local/anaconda3", required = TRUE)
-# use_condaenv(condaenv = "testpython310")
-# source_python("python/setup.py")
+# set up python environment (NEEDS TO BE ADAPTED) ----
+reticulate::use_python("PATH", required = TRUE)
+reticulate::use_condaenv(condaenv = "NAME")
+
 
 
 # define default values for flextables
@@ -77,12 +77,6 @@ source("R/setup_global_variables.R")
 path_script_R <- "R/01_functions/"
 files_R <- grep(dir(path = path_script_R, recursive = TRUE), pattern = "_old", invert = TRUE, value = TRUE)
 lapply(X = files_R, FUN = function(x) {source(paste0(path_script_R, x), echo = FALSE)})
-
-
-# # source python functions ----
-# path_script_python <- "python/functions/"
-# files_python <- dir(path = path_script_python)
-# lapply(X = files_python, FUN = function(x) {source_python(paste0(path_script_python, x))})
 
 
 # define additional R functions ----

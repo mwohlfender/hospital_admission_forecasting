@@ -7,7 +7,7 @@ process_results_lr <- function(number_job_array,
                                directory_results_processed = Directory_Results,
                                option_paths_data = "NONE",
                                option_paths_results_raw = "long_directory",
-                               do_new = Bool_Results_Processing_Do_New) {
+                               do_new = FALSE) {
   
   # read parameter grid of job array
   grid_combinations_data_kNp_dates_hyp <- read_csv(file =  paste0(Directory_Parameters, Path_Grid_Combinations_Data_kNp_Dates_Hyp, number_job_array, ".csv"))
@@ -38,6 +38,7 @@ process_results_lr <- function(number_job_array,
     pull(number_hyp_par_grid) %>%
     unique() %>%
     first()
+  
   
   # define directories where output shall be stored
   directory_results_processed_general <- get_path_results_raw(type_model = "lr",
@@ -147,7 +148,7 @@ process_results_lr <- function(number_job_array,
     
     
     # files containing results
-    directory_raw_results_train <- get_path_results_raw(type_model = "lr",
+    directory_results_raw_model_train <- get_path_results_raw(type_model = "lr",
                                                         number_xy = number_xy,
                                                         number_combination_features = number_combination_features,
                                                         name_data_set = name_data_set,
@@ -160,9 +161,9 @@ process_results_lr <- function(number_job_array,
                                                         type_period = "train",
                                                         option = option_paths_results_raw)
     
-    files_raw_results_train <- dir(path = directory_raw_results_train)
+    files_raw_results_train <- dir(path = directory_results_raw_model_train)
     
-    directory_raw_results_test <- get_path_results_raw(type_model = "lr",
+    directory_results_raw_model_test <- get_path_results_raw(type_model = "lr",
                                                        number_xy = number_xy,
                                                        number_combination_features = number_combination_features,
                                                        name_data_set = name_data_set,
@@ -175,7 +176,7 @@ process_results_lr <- function(number_job_array,
                                                        type_period = "test",
                                                        option = option_paths_results_raw )
     
-    files_raw_results_test <- dir(path = directory_raw_results_test)
+    files_raw_results_test <- dir(path = directory_results_raw_model_test)
     
     
     results_lr_detailed <- NULL
@@ -188,35 +189,35 @@ process_results_lr <- function(number_job_array,
       
       print(paste0("ii = ", ii))
       
-      pattern_file_names_ubelix_job_results_train_ii <- get_path_results_raw(type_model = "lr",
-                                                                             number_xy = number_xy,
-                                                                             number_combination_features = number_combination_features,
-                                                                             name_data_set = name_data_set,
-                                                                             number_combination_kNp = grid_combinations_kNp_dates_train_test$number_combination_kNp[ii],
-                                                                             group_dates_train_test = grid_combinations_kNp_dates_train_test$group_dates_train_test[ii],
-                                                                             number_dates_train_test = grid_combinations_kNp_dates_train_test$number_dates_train_test[ii],
-                                                                             number_hyp_par_grid = number_hyp_par_grid,
-                                                                             directory_results = directory_results,
-                                                                             ending = "",
-                                                                             option = "filename")
+      pattern_file_names_results_train_ii <- get_path_results_raw(type_model = "lr",
+                                                                  number_xy = number_xy,
+                                                                  number_combination_features = number_combination_features,
+                                                                  name_data_set = name_data_set,
+                                                                  number_combination_kNp = grid_combinations_kNp_dates_train_test$number_combination_kNp[ii],
+                                                                  group_dates_train_test = grid_combinations_kNp_dates_train_test$group_dates_train_test[ii],
+                                                                  number_dates_train_test = grid_combinations_kNp_dates_train_test$number_dates_train_test[ii],
+                                                                  number_hyp_par_grid = number_hyp_par_grid,
+                                                                  directory_results = directory_results_raw,
+                                                                  ending = "",
+                                                                  option = "filename")
       
-      files_raw_results_train_ii <- files_raw_results_train[grepl(pattern = pattern_file_names_ubelix_job_results_train_ii,
+      files_raw_results_train_ii <- files_raw_results_train[grepl(pattern = pattern_file_names_results_train_ii,
                                                                   x = files_raw_results_train, fixed = TRUE)]
       
       
-      pattern_file_names_ubelix_job_results_test_ii <- get_path_results_raw(type_model = "lr",
-                                                                            number_xy = number_xy,
-                                                                            number_combination_features = number_combination_features,
-                                                                            name_data_set = name_data_set,
-                                                                            number_combination_kNp = grid_combinations_kNp_dates_train_test$number_combination_kNp[ii],
-                                                                            group_dates_train_test = grid_combinations_kNp_dates_train_test$group_dates_train_test[ii],
-                                                                            number_dates_train_test = grid_combinations_kNp_dates_train_test$number_dates_train_test[ii],
-                                                                            number_hyp_par_grid = number_hyp_par_grid,
-                                                                            directory_results = directory_results,
-                                                                            ending = "",
-                                                                            option = "filename")
+      pattern_file_names_results_test_ii <- get_path_results_raw(type_model = "lr",
+                                                                 number_xy = number_xy,
+                                                                 number_combination_features = number_combination_features,
+                                                                 name_data_set = name_data_set,
+                                                                 number_combination_kNp = grid_combinations_kNp_dates_train_test$number_combination_kNp[ii],
+                                                                 group_dates_train_test = grid_combinations_kNp_dates_train_test$group_dates_train_test[ii],
+                                                                 number_dates_train_test = grid_combinations_kNp_dates_train_test$number_dates_train_test[ii],
+                                                                 number_hyp_par_grid = number_hyp_par_grid,
+                                                                 directory_results = directory_results_raw,
+                                                                 ending = "",
+                                                                 option = "filename")
       
-      files_raw_results_test_ii <- files_raw_results_test[grepl(pattern = pattern_file_names_ubelix_job_results_test_ii,
+      files_raw_results_test_ii <- files_raw_results_test[grepl(pattern = pattern_file_names_results_test_ii,
                                                                 x = files_raw_results_test, fixed = TRUE)]
       
       
@@ -249,7 +250,7 @@ process_results_lr <- function(number_job_array,
         
         for (jj in 1:length(files_raw_results_train_ii)) {
           
-          results_temp_train <- tibble(data.table::fread(paste0(directory_raw_results_train, files_raw_results_train_ii[jj]),
+          results_temp_train <- tibble(data.table::fread(paste0(directory_results_raw_model_train, files_raw_results_train_ii[jj]),
                                                          header = TRUE,
                                                          colClasses = c("number_xy" = "character",
                                                                         "number_combination_features" = "character",
@@ -266,7 +267,7 @@ process_results_lr <- function(number_job_array,
         
         for (jj in 1:length(files_raw_results_test_ii)) {
           
-          results_temp_test <- tibble(data.table::fread(paste0(directory_raw_results_test, files_raw_results_test_ii[jj]),
+          results_temp_test <- tibble(data.table::fread(paste0(directory_results_raw_model_test, files_raw_results_test_ii[jj]),
                                                         header = TRUE,
                                                         colClasses = c("number_xy" = "character",
                                                                        "number_combination_features" = "character",
@@ -286,7 +287,7 @@ process_results_lr <- function(number_job_array,
         # determine names of hyperparameters
         names_hyp_params <- results_lr_ii_0 %>%
           dplyr::select(-c("number_xy", "number_combination_features", "name_data_set", "number_combination_kNp", "group_dates_train_test",
-                           "number_dates_train_test", "number_hyp_par_grid_lr", "number_hyp_par_subgrid_lr")) %>%
+                           "number_dates_train_test", "number_hyp_par_grid_lr", "number_hyp_par_subgrid_lr", "iteration")) %>%
           dplyr::select(-starts_with("rmse_")) %>%
           dplyr::select(-starts_with("y_pred_")) %>%
           names()
@@ -355,7 +356,7 @@ process_results_lr <- function(number_job_array,
                  number_dates_train_test = grid_combinations_kNp_dates_train_test$number_dates_train_test[ii],
                  number_hyp_par_grid = number_hyp_par_grid)
         
-        results_lr_forecast_train <- results_lr_forecast_train %>% bind_rows(results_lr_forecast_train_ii)
+        results_lr_forecast_train <- bind_rows(results_lr_forecast_train, results_lr_forecast_train_ii)
         
         
         # determine forecast for testing period from `results_lr_summary_ii`
@@ -375,23 +376,23 @@ process_results_lr <- function(number_job_array,
                  number_dates_train_test = grid_combinations_kNp_dates_train_test$number_dates_train_test[ii],
                  number_hyp_par_grid = number_hyp_par_grid)
         
-        results_lr_forecast_test <- results_lr_forecast_test %>% bind_rows(results_lr_forecast_test_ii)
+        results_lr_forecast_test <- bind_rows(results_lr_forecast_test, results_lr_forecast_test_ii)
         
         
         # remove forecasts from `results_lr_ii`
-        results_lr_ii <- results_lr_ii %>%
+        results_lr_no_forecasts_ii <- results_lr_ii %>%
           dplyr::select(-starts_with("y_pred_"))
         
-        # add `results_lr_ii` to `results_lr_detailed`
-        results_lr_detailed <- rbind(results_lr_detailed, results_lr_ii)
+        # add `results_lr_no_forecasts_ii` to `results_lr_detailed`
+        results_lr_detailed <- bind_rows(results_lr_detailed, results_lr_no_forecasts_ii)
         
         
         # remove forecasts from `results_lr_summary_ii`
-        results_lr_summary_ii <- results_lr_summary_ii %>%
+        results_lr_summary_no_forecasts_ii <- results_lr_summary_ii %>%
           dplyr::select(-starts_with("y_pred_"))
         
-        # add `results_lr_summary_ii` to `results_lr_summary`
-        results_lr_summary <- rbind(results_lr_summary, results_lr_summary_ii)
+        # add `results_lr_summary_no_forecasts_ii` to `results_lr_summary`
+        results_lr_summary <- bind_rows(results_lr_summary, results_lr_summary_no_forecasts_ii)
         
       }
       

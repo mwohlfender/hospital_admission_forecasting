@@ -88,6 +88,9 @@ Subdirectory_Parameters_Hyperparameters <- "04_hyperparameters/"
 # subdirectory within `Directory_Parameters` where files containing information about the setup of high performance computing jobs (done on UBELIX) are stored
 Subdirectory_Parameters_Job_Setup <- "05_job_setup/"
 
+# subdirectory within `Directory_Parameters` where files containing information about the processing of the results of the high performance computing jobs (done on UBELIX) are stored
+Subdirectory_Parameters_Job_Results_Processing <- "06_job_results_processing/"
+
 
 # path within `Directory_Parameters` where overview of models is stored
 Path_Overview_Table_Models <- paste0(Subdirectory_Parameters_Models, "01_overview_table_models.csv")
@@ -111,6 +114,9 @@ Path_Grid_Combinations_kNp_Dates_Train_Test <- paste0(Subdirectory_Parameters_kN
 
 # general path within `Directory_Parameters` where grids of parameter combinations for model runs on UBELIX are stored
 Path_Grid_Combinations_Data_kNp_Dates_Hyp <- paste0(Subdirectory_Parameters_Job_Setup, "grid_combinations_data_kNp_dates_hyp_")
+
+# general path within `Directory_Parameters` where table of computing jobs whose results shall be processed are stored
+Path_Table_Jobs_Results_Processing <- paste0(Subdirectory_Parameters_Job_Results_Processing, "table_jobs_process_results.csv")
 
 
 
