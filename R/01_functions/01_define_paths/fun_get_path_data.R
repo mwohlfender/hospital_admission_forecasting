@@ -1,12 +1,12 @@
 
 
-get_path_data_train <- function(directory_data = paste0(Directory_Data, Subdirectory_Data_Feature_sets),
-                                number_xy,
+get_path_data_train <- function(number_xy,
                                 number_combination_features,
                                 name_data_set,
                                 number_combination_kNp,
                                 group_dates_train_test,
                                 number_dates_train_test,
+                                directory_data = paste0(Directory_Data, Subdirectory_Data_Feature_sets),
                                 option = "NONE") {
   
   if (option == "filename") {
@@ -80,13 +80,13 @@ get_path_data_train <- function(directory_data = paste0(Directory_Data, Subdirec
 }
 
 
-get_path_data_test <- function(directory_data = paste0(Directory_Data, Subdirectory_Data_Feature_sets),
-                               number_xy,
+get_path_data_test <- function(number_xy,
                                number_combination_features,
                                name_data_set,
                                number_combination_kNp,
                                group_dates_train_test,
                                number_dates_train_test,
+                               directory_data = paste0(Directory_Data, Subdirectory_Data_Feature_sets),
                                option = "NONE") {
   
   if (option == "filename") {
@@ -160,10 +160,10 @@ get_path_data_test <- function(directory_data = paste0(Directory_Data, Subdirect
 }
 
 
-get_path_data_features <- function(directory_data = paste0(Directory_Data, Subdirectory_Data_Feature_sets),
-                                   number_xy,
+get_path_data_features <- function(number_xy,
                                    number_combination_features,
                                    name_data_set,
+                                   directory_data = paste0(Directory_Data, Subdirectory_Data_Feature_sets),
                                    option = "NONE") {
   
   if (option == "filename") {
@@ -228,13 +228,13 @@ get_path_data_features <- function(directory_data = paste0(Directory_Data, Subdi
 }
 
 
-get_path_target_train <- function(directory_data = paste0(Directory_Data, Subdirectory_Data_Feature_sets),
-                                  number_xy,
+get_path_target_train <- function(number_xy,
                                   number_combination_features,
                                   name_data_set,
                                   number_combination_kNp,
                                   group_dates_train_test,
                                   number_dates_train_test,
+                                  directory_data = paste0(Directory_Data, Subdirectory_Data_Feature_sets),
                                   option = "NONE") {
   
   if (option == "filename") {
@@ -308,13 +308,13 @@ get_path_target_train <- function(directory_data = paste0(Directory_Data, Subdir
 }
 
 
-get_path_target_test <- function(directory_data = paste0(Directory_Data, Subdirectory_Data_Feature_sets),
-                                 number_xy,
+get_path_target_test <- function(number_xy,
                                  number_combination_features,
                                  name_data_set,
                                  number_combination_kNp,
                                  group_dates_train_test,
                                  number_dates_train_test,
+                                 directory_data = paste0(Directory_Data, Subdirectory_Data_Feature_sets),
                                  option = "NONE") {
   
   if (option == "filename") {

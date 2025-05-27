@@ -29,7 +29,7 @@ apply_model_lr <- function(number_xy,
                            directory_data = paste0(Directory_Data, Subdirectory_Data_Feature_sets),
                            directory_results = Directory_Results,
                            option_path = "long",
-                           do_new = Bool_Apply_Models_Do_New) {
+                           do_new = FALSE) {
   
   # determine directories of output
   directory_output_results_train <- get_path_results_raw(type_model = "lr",
