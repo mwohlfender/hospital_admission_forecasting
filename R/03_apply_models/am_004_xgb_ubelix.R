@@ -52,7 +52,7 @@ apply_model_xgb(number_xy = parameters_data_kNp_dates_hyp$number_xy,
                 directory_parameters = Directory_Parameters,
                 directory_data = Directory_Data,
                 directory_results = Directory_Results,
-                option_path_data = "short_directory_filename",
+                option_paths_data = "short_directory_filename",
                 option_path_results = "short")
 
 

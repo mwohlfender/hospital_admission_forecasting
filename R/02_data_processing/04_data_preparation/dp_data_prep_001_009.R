@@ -43,89 +43,91 @@ sequence_days <- seq(min_date, max_date, "day")
 
 
 # load data
-path_data_features_001_base <- get_path_data_features(directory_data = paste0(Directory_Data, Subdirectory_Data_Feature_sets),
-                                                      number_xy = number_xy,
-                                                      number_combination_features = "001",
-                                                      name_data_set = "base")
+path_features_target_001_base <- get_path_features_target(number_xy = number_xy,
+                                                          number_combination_features = "001",
+                                                          name_data_set = "base",
+                                                          option_path = "long_directory_filename")
 
-data_features_001_base <- read_csv(file = path_data_features_001_base) %>%
+features_target_001_base <- read_csv(file = path_features_target_001_base) %>%
   dplyr::select(-c("x", starts_with("y_")))
 
 
-path_data_features_002_base <- get_path_data_features(directory_data = paste0(Directory_Data, Subdirectory_Data_Feature_sets),
-                                                      number_xy = number_xy,
-                                                      number_combination_features = "002",
-                                                      name_data_set = "base")
+path_features_target_002_base <- get_path_features_target(number_xy = number_xy,
+                                                          number_combination_features = "002",
+                                                          name_data_set = "base",
+                                                          option_path = "long_directory_filename")
 
-data_features_002_base <- read_csv(file = path_data_features_002_base) %>%
+features_target_002_base <- read_csv(file = path_features_target_002_base) %>%
   dplyr::select(-c("x", starts_with("y_")))
 
 
-path_data_features_003_base <- get_path_data_features(directory_data = paste0(Directory_Data, Subdirectory_Data_Feature_sets),
-                                                      number_xy = number_xy,
-                                                      number_combination_features = "003",
-                                                      name_data_set = "base")
+path_features_target_003_base <- get_path_features_target(number_xy = number_xy,
+                                                          number_combination_features = "003",
+                                                          name_data_set = "base",
+                                                          option_path = "long_directory_filename")
 
-data_features_003_base <- read_csv(file = path_data_features_003_base) %>%
+features_target_003_base <- read_csv(file = path_features_target_003_base) %>%
   dplyr::select(-c("x", starts_with("y_")))
 
 
-path_data_features_005_base <- get_path_data_features(directory_data = paste0(Directory_Data, Subdirectory_Data_Feature_sets),
-                                                      number_xy = number_xy,
-                                                      number_combination_features = "005",
-                                                      name_data_set = "base")
+path_features_target_005_base <- get_path_features_target(number_xy = number_xy,
+                                                          number_combination_features = "005",
+                                                          name_data_set = "base",
+                                                          option_path = "long_directory_filename")
 
-data_features_005_base <- read_csv(file = path_data_features_005_base) %>%
+
+features_target_005_base <- read_csv(file = path_features_target_005_base) %>%
   dplyr::select(-c("x", starts_with("y_")))
 
 
-path_data_features_006_base <- get_path_data_features(directory_data = paste0(Directory_Data, Subdirectory_Data_Feature_sets),
-                                                      number_xy = number_xy,
-                                                      number_combination_features = "006",
-                                                      name_data_set = "base")
+path_features_target_006_base <- get_path_features_target(number_xy = number_xy,
+                                                          number_combination_features = "006",
+                                                          name_data_set = "base",
+                                                          option_path = "long_directory_filename")
 
-data_features_006_base <- read_csv(file = path_data_features_006_base) %>%
+
+features_target_006_base <- read_csv(file = path_features_target_006_base) %>%
   dplyr::select(-c("x", starts_with("y_")))
 
 
 # join `sequence_days` and `table_days_icd_u07_1_20200101_20230630`
-data_features_009_base <- tibble(date_day = sequence_days) %>%
+features_target_009_base <- tibble(date_day = sequence_days) %>%
   left_join(table_days_icd_u07_1_20200101_20230630 %>% dplyr::select(c("date_day", "icd10_code_U07_1")), by = "date_day") %>%
   mutate_if(is.numeric , replace_na, replace = 0) %>%
   dplyr::rename(c("x" = "icd10_code_U07_1"))
 
-# join `data_features_009_base` and `data_features_001_base`
-data_features_009_base <- data_features_009_base %>%
-  left_join(data_features_001_base, by = "date_day")
+# join `features_target_009_base` and `features_target_001_base`
+features_target_009_base <- features_target_009_base %>%
+  left_join(features_target_001_base, by = "date_day")
 
-# join `data_features_009_base` and `data_features_002_base`
-data_features_009_base <- data_features_009_base %>%
-  left_join(data_features_002_base, by = "date_day")
+# join `features_target_009_base` and `features_target_002_base`
+features_target_009_base <- features_target_009_base %>%
+  left_join(features_target_002_base, by = "date_day")
 
-# join `data_features_009_base` and `data_features_003_base`
-data_features_009_base <- data_features_009_base %>%
-  left_join(data_features_003_base, by = "date_day")
+# join `features_target_009_base` and `features_target_003_base`
+features_target_009_base <- features_target_009_base %>%
+  left_join(features_target_003_base, by = "date_day")
 
-# join `data_features_009_base` and `data_features_005_base`
-data_features_009_base <- data_features_009_base %>%
-  left_join(data_features_005_base, by = "date_day")
+# join `features_target_009_base` and `features_target_005_base`
+features_target_009_base <- features_target_009_base %>%
+  left_join(features_target_005_base, by = "date_day")
 
-# join `data_features_009_base` and `data_features_006_base`
-data_features_009_base <- data_features_009_base %>%
-  left_join(data_features_006_base, by = "date_day")
+# join `features_target_009_base` and `features_target_006_base`
+features_target_009_base <- features_target_009_base %>%
+  left_join(features_target_006_base, by = "date_day")
 
 
 # create data sets and store them
-data_preparation_series_001(data_features = data_features_009_base,
+data_preparation_series_001(data_features = features_target_009_base,
                             number_combination_features = number_combination_features,
                             name_data_set = name_data_set,
                             table_parameters_kNp = table_parameters_kNp_filtered,
                             table_dates_train_test = table_dates_train_test_detailed_filtered,
                             remove_x = FALSE,
-                            overwrite = FALSE)
+                            overwrite = Bool_Data_Processing_Do_New)
 
 
-# `data_features_009_base`: add variable y (= y_{0,N} for all N present in `table_parameters_kNp`)
+# `features_target_009_base`: add variable y (= y_{0,N} for all N present in `table_parameters_kNp`)
 # y_{0,N}(t) = x(t) + x(t+1) + x(t+2) + ... + x(t+N-1)
 list_N <- table_parameters_kNp %>% pull(N) %>% unique()
 
@@ -133,7 +135,7 @@ for (ii in 1:length(list_N)) {
   
   name_new_column <- paste0("y_", str_pad(list_N[ii], 2, pad = "0"))
   
-  data_features_009_base <- data_features_009_base %>%
+  features_target_009_base <- features_target_009_base %>%
     dplyr::mutate(y=x) %>%
     timetk::tk_augment_leads(.value=y,
                              .lags=-seq(from = 0, to = list_N[ii] - 1, by = 1)) %>%
@@ -147,16 +149,16 @@ for (ii in 1:length(list_N)) {
 }
 
 
-# store `data_features_009_base`
-path_data_features_009_base <- get_path_data_features(directory_data = paste0(Directory_Data, Subdirectory_Data_Feature_sets),
-                                                      number_xy = number_xy,
-                                                      number_combination_features = number_combination_features,
-                                                      name_data_set = name_data_set)
+# store `features_target_009_base`
+path_features_target_009_base <- get_path_features_target(number_xy = number_xy,
+                                                          number_combination_features = number_combination_features,
+                                                          name_data_set = name_data_set,
+                                                          option_path = "long_directory_filename")
 
-if (!(file.exists(path_data_features_009_base)) | Bool_Data_Processing_Do_New) {
+if (!(file.exists(path_features_target_009_base)) | Bool_Data_Processing_Do_New) {
   
-  write_csv(x = data_features_009_base,
-            file = path_data_features_009_base)
+  write_csv(x = features_target_009_base,
+            file = path_features_target_009_base)
   
 }
 

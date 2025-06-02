@@ -12,12 +12,12 @@ for (ii in 1:nrow(table_jobs_process_results)) {
   if (table_jobs_process_results$type_model[ii] == "lr") {
     
     process_results_lr(number_job_array = table_jobs_process_results$number_job_array[ii],
-                       directory_data = paste0(Directory_Data, Subdirectory_Data_Feature_sets),
-                       directory_parameters = Directory_Parameters,
-                       directory_results_raw = Directory_Results,
+                       directory_data = paste0(Directory_Computing_Jobs, table_jobs_process_results$number_job_array[ii], "/", Subdirectory_Jobs_Data),
+                       directory_parameters = paste0(Directory_Computing_Jobs, table_jobs_process_results$number_job_array[ii], "/", Subdirectory_Jobs_Parameters),
+                       directory_results_raw = paste0(Directory_Computing_Jobs, table_jobs_process_results$number_job_array[ii], "/", Subdirectory_Jobs_Results),
                        directory_results_processed = Directory_Results,
-                       option_paths_data = "NONE",
-                       option_paths_results_raw = "long_directory",
+                       option_paths_data = "short",
+                       option_paths_results_raw = "short",
                        do_new = Bool_Results_Processing_Do_New)
     
   }
@@ -27,37 +27,39 @@ for (ii in 1:nrow(table_jobs_process_results)) {
     
     process_results_lstm(number_job_array = table_jobs_process_results$number_job_array[ii],
                          directory_data = paste0(Directory_Data, Subdirectory_Data_Feature_sets),
-                         directory_parameters = Directory_Parameters,
-                         directory_results_raw = Directory_Results,
+                         directory_parameters = paste0(Directory_Computing_Jobs, table_jobs_process_results$number_job_array[ii], "/", Subdirectory_Jobs_Parameters),
+                         directory_results_raw = paste0(Directory_Computing_Jobs, table_jobs_process_results$number_job_array[ii], "/", Subdirectory_Jobs_Results),
                          directory_results_processed = Directory_Results,
-                         option_paths_data = "NONE",
-                         option_paths_results_raw = "long_directory",
+                         option_paths_data = "short",
+                         option_paths_results_raw = "short",
                          do_new = Bool_Results_Processing_Do_New)
     
   }
+  
   
   if (table_jobs_process_results$type_model[ii] == "rnn") {
     
     process_results_rnn(number_job_array = table_jobs_process_results$number_job_array[ii],
                         directory_data = paste0(Directory_Data, Subdirectory_Data_Feature_sets),
-                        directory_parameters = Directory_Parameters,
-                        directory_results_raw = Directory_Results,
+                        directory_parameters = paste0(Directory_Computing_Jobs, table_jobs_process_results$number_job_array[ii], "/", Subdirectory_Jobs_Parameters),
+                        directory_results_raw = paste0(Directory_Computing_Jobs, table_jobs_process_results$number_job_array[ii], "/", Subdirectory_Jobs_Results),
                         directory_results_processed = Directory_Results,
-                        option_paths_data = "NONE",
-                        option_paths_results_raw = "long_directory",
+                        option_paths_data = "short",
+                        option_paths_results_raw = "short",
                         do_new = Bool_Results_Processing_Do_New)
     
   }
+  
   
   if (table_jobs_process_results$type_model[ii] == "xgb") {
     
     process_results_xgb(number_job_array = table_jobs_process_results$number_job_array[ii],
                         directory_data = paste0(Directory_Data, Subdirectory_Data_Feature_sets),
-                        directory_parameters = Directory_Parameters,
-                        directory_results_raw = Directory_Results,
+                        directory_parameters = paste0(Directory_Computing_Jobs, table_jobs_process_results$number_job_array[ii], "/", Subdirectory_Jobs_Parameters),
+                        directory_results_raw = paste0(Directory_Computing_Jobs, table_jobs_process_results$number_job_array[ii], "/", Subdirectory_Jobs_Results),
                         directory_results_processed = Directory_Results,
-                        option_paths_data = "NONE",
-                        option_paths_results_raw = "long_directory",
+                        option_paths_data = "short",
+                        option_paths_results_raw = "short",
                         do_new = Bool_Results_Processing_Do_New)
     
   }

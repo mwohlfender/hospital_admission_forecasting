@@ -33,7 +33,7 @@ create_grid_combinations_kNp_dates_train_test <- function(number_grid,
     # (b) add column `list_numbers_combinations_kNp`
     grid_combinations_kNp_dates_train_test <- table_dates_train_test_detailed_filtered %>%
       dplyr::slice(rep(1:n(), each = length(list_numbers_combinations_kNp))) %>%
-      mutate(number_combination_kNp = rep(x = list_numbers_combinations_kNp, times = nrow(table_dates_train_test_0))) %>%
+      mutate(number_combination_kNp = rep(x = list_numbers_combinations_kNp, times = nrow(table_dates_train_test_detailed_filtered))) %>%
       dplyr::select(c("number_combination_kNp", "group_dates_train_test", "number_dates_train_test")) %>%
       dplyr::arrange(number_combination_kNp, group_dates_train_test, number_dates_train_test)
     

@@ -1,14 +1,42 @@
 
 # function `apply_model_locf`: apply last observation carried forward model
 
-
+# `option_paths_data`: "long" or "short"
 
 apply_model_locf <- function(number_xy,
                              number_grid_combinations_kNp_dates_train_test,
                              directory_data = paste0(Directory_Data, Subdirectory_Data_Feature_sets),
+                             option_paths_data = "long",
                              directory_results = Directory_Results,
                              do_new = Bool_Apply_Models_Do_New) {
   
+  # determine directories of output
+  directory_results_forecasts_locf_train <- get_path_results_forecasts(directory_results = directory_results,
+                                                                       type_model = "locf",
+                                                                       number_xy = number_xy,
+                                                                       type_period = "train",
+                                                                       option = "directory")
+  
+  directory_results_forecasts_locf_test <- get_path_results_forecasts(directory_results = directory_results,
+                                                                      type_model = "locf",
+                                                                      number_xy = number_xy,
+                                                                      type_period = "test",
+                                                                      option = "directory")
+  
+  # create directories to store output (if they do not already exist)
+  if (!(file.exists(directory_results_forecasts_locf_train))) {
+    
+    dir.create(file.path(directory_results_forecasts_locf_train), recursive = TRUE)
+    
+  }
+  
+  if (!(file.exists(directory_results_forecasts_locf_test))) {
+    
+    dir.create(file.path(directory_results_forecasts_locf_test), recursive = TRUE)
+    
+  }
+  
+  # determine paths of output
   path_results_summary_locf <- get_path_results_processed_summary(directory_results = directory_results,
                                                                   type_model = "locf",
                                                                   number_xy = number_xy,
@@ -18,21 +46,25 @@ apply_model_locf <- function(number_xy,
                                                                   type_model = "locf",
                                                                   number_xy = number_xy,
                                                                   number_grid_combinations_kNp_dates_train_test = number_grid_combinations_kNp_dates_train_test,
-                                                                  type_period = "train")
+                                                                  type_period = "train",
+                                                                  option = "directory_filename")
   
   path_results_forecasts_locf_test <- get_path_results_forecasts(directory_results = directory_results,
                                                                  type_model = "locf",
                                                                  number_xy = number_xy,
                                                                  number_grid_combinations_kNp_dates_train_test = number_grid_combinations_kNp_dates_train_test,
-                                                                 type_period = "test")
+                                                                 type_period = "test",
+                                                                 option = "directory_filename")
   
   if (!(file.exists(path_results_summary_locf)) | !(file.exists(path_results_forecasts_locf_train)) | !(file.exists(path_results_forecasts_locf_test)) | do_new) {
     
     # read data: days and target variable
-    data_features_000_base <- read_csv(file = get_path_data_features(directory_data = paste0(Directory_Data, Subdirectory_Data_Feature_sets),
-                                                                     number_xy = number_xy,
-                                                                     number_combination_features = "000",
-                                                                     name_data_set = "base"))
+    data_features_000_base <- read_csv(file = get_path_features_target(number_xy = number_xy,
+                                                                       number_combination_features = "000",
+                                                                       name_data_set = "base",
+                                                                       option_output = "features_target",
+                                                                       directory_data = directory_data,
+                                                                       option_path = paste0(option_paths_data, "_directory_filename")))
     
     table_parameters_kNp <- read_csv(file = paste0(Directory_Parameters, Path_Table_Parameters_kNp))
     
@@ -65,13 +97,15 @@ apply_model_locf <- function(number_xy,
     
     for (ii in 1:nrow(results_summary_locf)) {
       
-      target_train_ii <- read_csv(file = get_path_target_train(directory_data = paste0(Directory_Data, Subdirectory_Data_Feature_sets),
-                                                               number_xy = number_xy,
-                                                               number_combination_features = "000",
-                                                               name_data_set = "base",
-                                                               number_combination_kNp = results_summary_locf$number_combination_kNp[ii],
-                                                               group_dates_train_test = results_summary_locf$group_dates_train_test[ii],
-                                                               number_dates_train_test = results_summary_locf$number_dates_train_test[ii]))
+      target_train_ii <- read_csv(file = get_path_features_target(number_xy = number_xy,
+                                                                  number_combination_features = "000",
+                                                                  name_data_set = "base",
+                                                                  number_combination_kNp = results_summary_locf$number_combination_kNp[ii],
+                                                                  group_dates_train_test = results_summary_locf$group_dates_train_test[ii],
+                                                                  number_dates_train_test = results_summary_locf$number_dates_train_test[ii],
+                                                                  option_output = "target_train",
+                                                                  directory_data = directory_data,
+                                                                  option_path = paste0(option_paths_data, "_directory_filename")))
       
       forecasts_locf_train_ii <- target_train_ii %>%
         dplyr::select(c("date_day", "date_day_shift_k")) %>%
@@ -92,13 +126,15 @@ apply_model_locf <- function(number_xy,
       results_summary_locf$rmse_locf_train[ii] <- Metrics::rmse(actual = target_train_ii$y, predicted = forecasts_locf_train_ii$y)
       
       
-      target_test_ii <-  read_csv(file = get_path_target_test(directory_data = paste0(Directory_Data, Subdirectory_Data_Feature_sets),
-                                                              number_xy = number_xy,
-                                                              number_combination_features = "000",
-                                                              name_data_set = "base",
-                                                              number_combination_kNp = results_summary_locf$number_combination_kNp[ii],
-                                                              group_dates_train_test = results_summary_locf$group_dates_train_test[ii],
-                                                              number_dates_train_test = results_summary_locf$number_dates_train_test[ii]))
+      target_test_ii <-  read_csv(file = get_path_features_target(number_xy = number_xy,
+                                                                  number_combination_features = "000",
+                                                                  name_data_set = "base",
+                                                                  number_combination_kNp = results_summary_locf$number_combination_kNp[ii],
+                                                                  group_dates_train_test = results_summary_locf$group_dates_train_test[ii],
+                                                                  number_dates_train_test = results_summary_locf$number_dates_train_test[ii],
+                                                                  option_output = "target_test",
+                                                                  directory_data = directory_data,
+                                                                  option_path = paste0(option_paths_data, "_directory_filename")))
       
       forecasts_locf_test_ii <- target_test_ii %>%
         dplyr::select(c("date_day", "date_day_shift_k")) %>%
@@ -128,7 +164,7 @@ apply_model_locf <- function(number_xy,
     
     write_csv(x = forecasts_locf_test,
               file = path_results_forecasts_locf_test)
-
+    
   }
   
 }

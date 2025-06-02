@@ -13,8 +13,9 @@
 # `number_hyp_par_subgrid_lr`:
 # `directory_parameters`:
 # `directory_data`: general path to feature matrix and target variable vector for training and testing period
+# `option_paths_data`: "long" or "short"
 # `directory_results`: general path to folder where results are stored
-# `option_path`:
+# `option_path_results`: "long" or "short"
 # `do_new:` whether or not calculations shall be repeated even though the results files already exist
 
 apply_model_lr <- function(number_xy,
@@ -25,10 +26,11 @@ apply_model_lr <- function(number_xy,
                            number_dates_train_test,
                            number_hyp_par_grid_lr,
                            number_hyp_par_subgrid_lr,
-                           directory_parameters = Directory_Parameters,
-                           directory_data = paste0(Directory_Data, Subdirectory_Data_Feature_sets),
-                           directory_results = Directory_Results,
-                           option_path = "long",
+                           directory_parameters,
+                           directory_data,
+                           option_paths_data = "short",
+                           directory_results,
+                           option_path_results = "short",
                            do_new = FALSE) {
   
   # determine directories of output
@@ -38,7 +40,7 @@ apply_model_lr <- function(number_xy,
                                                          name_data_set = name_data_set,
                                                          directory_results = directory_results,
                                                          type_period = "train",
-                                                         option = paste0(option_path, "_directory"))
+                                                         option = paste0(option_path_results, "_directory"))
   
   if (!(dir.exists(directory_output_results_train))) {
     
@@ -52,7 +54,7 @@ apply_model_lr <- function(number_xy,
                                                         name_data_set = name_data_set,
                                                         directory_results = directory_results,
                                                         type_period = "test",
-                                                        option = paste0(option_path, "_directory"))
+                                                        option = paste0(option_path_results, "_directory"))
   
   if (!(dir.exists(directory_output_results_test))) {
     
@@ -64,7 +66,7 @@ apply_model_lr <- function(number_xy,
                                                                     number_combination_features = number_combination_features,
                                                                     name_data_set = name_data_set,
                                                                     directory_results = directory_results,
-                                                                    option = paste0(option_path, "_directory"))
+                                                                    option = paste0(option_path_results, "_directory"))
   
   if (!(dir.exists(directory_output_coefficients))) {
     
@@ -86,7 +88,7 @@ apply_model_lr <- function(number_xy,
                                                     directory_results = directory_results,
                                                     type_period = "train",
                                                     ending = ".csv",
-                                                    option = paste0(option_path, "_directory_filename"))
+                                                    option = paste0(option_path_results, "_directory_filename"))
   
   path_output_results_test <- get_path_results_raw(type_model = "lr",
                                                    number_xy = number_xy,
@@ -100,53 +102,54 @@ apply_model_lr <- function(number_xy,
                                                    directory_results = directory_results,
                                                    type_period = "test",
                                                    ending = ".csv",
-                                                   option = paste0(option_path, "_directory_filename"))
+                                                   option = paste0(option_path_results, "_directory_filename"))
   
   
   if (!(file.exists(path_output_results_train)) | !(file.exists(path_output_results_test)) | do_new) {
     
-    # determine paths of data
-    path_data_train <- get_path_data_train(directory_data = directory_data,
-                                           number_xy = number_xy,
-                                           number_combination_features = number_combination_features,
-                                           name_data_set = name_data_set,
-                                           number_combination_kNp = number_combination_kNp,
-                                           group_dates_train_test = group_dates_train_test,
-                                           number_dates_train_test = number_dates_train_test)
-    
-    path_data_test <- get_path_data_test(directory_data = directory_data,
-                                         number_xy = number_xy,
-                                         number_combination_features = number_combination_features,
-                                         name_data_set = name_data_set,
-                                         number_combination_kNp = number_combination_kNp,
-                                         group_dates_train_test = group_dates_train_test,
-                                         number_dates_train_test = number_dates_train_test)
-    
-    path_target_train <- get_path_target_train(directory_data = directory_data,
-                                               number_xy = number_xy,
-                                               number_combination_features = number_combination_features,
-                                               name_data_set = name_data_set,
-                                               number_combination_kNp = number_combination_kNp,
-                                               group_dates_train_test = group_dates_train_test,
-                                               number_dates_train_test = number_dates_train_test)
-    
-    path_target_test <- get_path_target_test(directory_data = directory_data,
-                                             number_xy = number_xy,
-                                             number_combination_features = number_combination_features,
-                                             name_data_set = name_data_set,
-                                             number_combination_kNp = number_combination_kNp,
-                                             group_dates_train_test = group_dates_train_test,
-                                             number_dates_train_test = number_dates_train_test)
-    
     # read training data
-    data_train <- read_csv(file = path_data_train)
-    target_train <- read_csv(file = path_target_train)
+    data_train <- read_csv(file = get_path_features_target(number_xy = number_xy,
+                                                           number_combination_features = number_combination_features,
+                                                           name_data_set = name_data_set,
+                                                           number_combination_kNp = number_combination_kNp,
+                                                           group_dates_train_test = group_dates_train_test,
+                                                           number_dates_train_test = number_dates_train_test,
+                                                           option_output = "features_train",
+                                                           directory_data = directory_data,
+                                                           option_path = paste0(option_paths_data, "_directory_filename")))
+    
+    target_train <- read_csv(file = get_path_features_target(number_xy = number_xy,
+                                                             number_combination_features = number_combination_features,
+                                                             name_data_set = name_data_set,
+                                                             number_combination_kNp = number_combination_kNp,
+                                                             group_dates_train_test = group_dates_train_test,
+                                                             number_dates_train_test = number_dates_train_test,
+                                                             option_output = "target_train",
+                                                             directory_data = directory_data,
+                                                             option_path = paste0(option_paths_data, "_directory_filename")))
     
     length_training_period <- nrow(data_train)
     
     # read testing data
-    data_test <- read_csv(file = path_data_test)
-    target_test <- read_csv(file = path_target_test)
+    data_test <- read_csv(file = get_path_features_target(number_xy = number_xy,
+                                                          number_combination_features = number_combination_features,
+                                                          name_data_set = name_data_set,
+                                                          number_combination_kNp = number_combination_kNp,
+                                                          group_dates_train_test = group_dates_train_test,
+                                                          number_dates_train_test = number_dates_train_test,
+                                                          option_output = "features_test",
+                                                          directory_data = directory_data,
+                                                          option_path = paste0(option_paths_data, "_directory_filename")))
+    
+    target_test <- read_csv(file = get_path_features_target(number_xy = number_xy,
+                                                            number_combination_features = number_combination_features,
+                                                            name_data_set = name_data_set,
+                                                            number_combination_kNp = number_combination_kNp,
+                                                            group_dates_train_test = group_dates_train_test,
+                                                            number_dates_train_test = number_dates_train_test,
+                                                            option_output = "target_test",
+                                                            directory_data = directory_data,
+                                                            option_path = paste0(option_paths_data, "_directory_filename")))
     
     length_testing_period <- nrow(data_test)
     
@@ -191,31 +194,31 @@ apply_model_lr <- function(number_xy,
       
       pred_lin_reg_conf_train_ii <- tibble(data.frame(stats::predict(model_lin_reg_ii, newdata = data_train, interval = "confidence", level = 0.80)))
       
-     
+      
       names_output_train_y_pred_lr <- unlist(lapply(X = 1:length_training_period,
-                                          FUN = function(x) paste0("y_pred_lr_train_", str_pad(x, ceiling(log(length_training_period, base = 10)), pad = "0"))))
+                                                    FUN = function(x) paste0("y_pred_lr_train_", str_pad(x, ceiling(log(length_training_period, base = 10)), pad = "0"))))
       
       names_output_train_y_pred_lr_pred_lwr <- unlist(lapply(X = 1:length_training_period,
-                                                    FUN = function(x) paste0("y_pred_lr_pred_lwr_train_", str_pad(x, ceiling(log(length_training_period, base = 10)), pad = "0"))))
+                                                             FUN = function(x) paste0("y_pred_lr_pred_lwr_train_", str_pad(x, ceiling(log(length_training_period, base = 10)), pad = "0"))))
       
       names_output_train_y_pred_lr_pred_upr <- unlist(lapply(X = 1:length_training_period,
-                                                    FUN = function(x) paste0("y_pred_lr_pred_upr_train_", str_pad(x, ceiling(log(length_training_period, base = 10)), pad = "0"))))
+                                                             FUN = function(x) paste0("y_pred_lr_pred_upr_train_", str_pad(x, ceiling(log(length_training_period, base = 10)), pad = "0"))))
       
       names_output_train_y_pred_lr_conf_lwr <- unlist(lapply(X = 1:length_training_period,
-                                                    FUN = function(x) paste0("y_pred_lr_conf_lwr_train_", str_pad(x, ceiling(log(length_training_period, base = 10)), pad = "0"))))
+                                                             FUN = function(x) paste0("y_pred_lr_conf_lwr_train_", str_pad(x, ceiling(log(length_training_period, base = 10)), pad = "0"))))
       
       names_output_train_y_pred_lr_conf_upr <- unlist(lapply(X = 1:length_training_period,
-                                                    FUN = function(x) paste0("y_pred_lr_conf_upr_train_", str_pad(x, ceiling(log(length_training_period, base = 10)), pad = "0"))))
+                                                             FUN = function(x) paste0("y_pred_lr_conf_upr_train_", str_pad(x, ceiling(log(length_training_period, base = 10)), pad = "0"))))
       
       predictions_lr_train_ii <- bind_cols(as_tibble(matrix(data = c(pred_lin_reg_pred_train_ii$fit,pred_lin_reg_pred_train_ii$lwr, pred_lin_reg_pred_train_ii$upr,
                                                                      pred_lin_reg_conf_train_ii$lwr, pred_lin_reg_conf_train_ii$upr),
-                                 nrow = 1, ncol = 5*length_training_period,
-                                 dimnames = list(NULL, c(names_output_train_y_pred_lr, names_output_train_y_pred_lr_pred_lwr, names_output_train_y_pred_lr_pred_upr,
-                                                         names_output_train_y_pred_lr_conf_lwr, names_output_train_y_pred_lr_conf_upr)))))
+                                                            nrow = 1, ncol = 5*length_training_period,
+                                                            dimnames = list(NULL, c(names_output_train_y_pred_lr, names_output_train_y_pred_lr_pred_lwr, names_output_train_y_pred_lr_pred_upr,
+                                                                                    names_output_train_y_pred_lr_conf_lwr, names_output_train_y_pred_lr_conf_upr)))))
       
       predictions_lr_train <- predictions_lr_train %>%
         bind_rows(predictions_lr_train_ii)
-
+      
       
       # predict: testing period
       pred_lin_reg_pred_test_ii <- tibble(data.frame(stats::predict(model_lin_reg_ii, newdata = data_test, interval = "predict", level = 0.80)))
@@ -224,25 +227,25 @@ apply_model_lr <- function(number_xy,
       
       
       names_output_test_y_pred_lr <- unlist(lapply(X = 1:length_testing_period,
-                                                    FUN = function(x) paste0("y_pred_lr_test_", str_pad(x, ceiling(log(length_testing_period, base = 10)), pad = "0"))))
+                                                   FUN = function(x) paste0("y_pred_lr_test_", str_pad(x, ceiling(log(length_testing_period, base = 10)), pad = "0"))))
       
       names_output_test_y_pred_lr_pred_lwr <- unlist(lapply(X = 1:length_testing_period,
-                                                             FUN = function(x) paste0("y_pred_lr_pred_lwr_test_", str_pad(x, ceiling(log(length_testing_period, base = 10)), pad = "0"))))
+                                                            FUN = function(x) paste0("y_pred_lr_pred_lwr_test_", str_pad(x, ceiling(log(length_testing_period, base = 10)), pad = "0"))))
       
       names_output_test_y_pred_lr_pred_upr <- unlist(lapply(X = 1:length_testing_period,
-                                                             FUN = function(x) paste0("y_pred_lr_pred_upr_test_", str_pad(x, ceiling(log(length_testing_period, base = 10)), pad = "0"))))
+                                                            FUN = function(x) paste0("y_pred_lr_pred_upr_test_", str_pad(x, ceiling(log(length_testing_period, base = 10)), pad = "0"))))
       
       names_output_test_y_pred_lr_conf_lwr <- unlist(lapply(X = 1:length_testing_period,
-                                                             FUN = function(x) paste0("y_pred_lr_conf_lwr_test_", str_pad(x, ceiling(log(length_testing_period, base = 10)), pad = "0"))))
+                                                            FUN = function(x) paste0("y_pred_lr_conf_lwr_test_", str_pad(x, ceiling(log(length_testing_period, base = 10)), pad = "0"))))
       
       names_output_test_y_pred_lr_conf_upr <- unlist(lapply(X = 1:length_testing_period,
-                                                             FUN = function(x) paste0("y_pred_lr_conf_upr_test_", str_pad(x, ceiling(log(length_testing_period, base = 10)), pad = "0"))))
+                                                            FUN = function(x) paste0("y_pred_lr_conf_upr_test_", str_pad(x, ceiling(log(length_testing_period, base = 10)), pad = "0"))))
       
       predictions_lr_test_ii <- bind_cols(as_tibble(matrix(data = c(pred_lin_reg_pred_test_ii$fit, pred_lin_reg_pred_test_ii$lwr, pred_lin_reg_pred_test_ii$upr,
-                                                                     pred_lin_reg_conf_test_ii$lwr, pred_lin_reg_conf_test_ii$upr),
-                                                            nrow = 1, ncol = 5*length_testing_period,
-                                                            dimnames = list(NULL, c(names_output_test_y_pred_lr, names_output_test_y_pred_lr_pred_lwr, names_output_test_y_pred_lr_pred_upr,
-                                                                                    names_output_test_y_pred_lr_conf_lwr, names_output_test_y_pred_lr_conf_upr)))))
+                                                                    pred_lin_reg_conf_test_ii$lwr, pred_lin_reg_conf_test_ii$upr),
+                                                           nrow = 1, ncol = 5*length_testing_period,
+                                                           dimnames = list(NULL, c(names_output_test_y_pred_lr, names_output_test_y_pred_lr_pred_lwr, names_output_test_y_pred_lr_pred_upr,
+                                                                                   names_output_test_y_pred_lr_conf_lwr, names_output_test_y_pred_lr_conf_upr)))))
       
       predictions_lr_test <- predictions_lr_test %>%
         bind_rows(predictions_lr_test_ii)
@@ -257,7 +260,7 @@ apply_model_lr <- function(number_xy,
                                                                       number_hyp_par_grid = number_hyp_par_grid_lr,
                                                                       number_hyp_par_subgrid = number_hyp_par_subgrid_lr,
                                                                       directory_results = directory_results,
-                                                                      option = paste0(option_path, "_directory_filename"),
+                                                                      option = paste0(option_path_results, "_directory_filename"),
                                                                       ending = paste0("_", as.character(ii), ".txt"))
       
       # save coefficients

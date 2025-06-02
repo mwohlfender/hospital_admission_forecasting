@@ -1,7 +1,7 @@
 
 
-# `option`: Either `filename`, `long_directory`, `long_directory_filename`, `short_directory` or `short_directory_filename`.
-# Default: `filename`
+# `option`: Either "filename", "long_directory", "long_directory_filename", "short_directory" or "short_directory_filename."
+# Default: "filename"
 
 get_path_results_raw <- function(type_model,
                                  number_xy,
@@ -12,10 +12,10 @@ get_path_results_raw <- function(type_model,
                                  number_dates_train_test = "NONE",
                                  number_hyp_par_grid = "NONE",
                                  number_hyp_par_subgrid = "NONE",
-                                 directory_results = Directory_Results,
                                  type_period = "NONE",
-                                 ending = ".csv",
-                                 option = "filename") {
+                                 directory_results = Directory_Results,
+                                 option = "filename",
+                                 ending = ".csv") {
   
   if (option == "long_directory") {
     
@@ -39,7 +39,23 @@ get_path_results_raw <- function(type_model,
     
   } else if (option == "short_directory") {
     
-    output <- directory_results
+    if (type_period != "NONE") {
+      
+      if (type_period == "train") {
+        
+        output <- paste0(directory_results, "train/")
+        
+      } else {
+        
+        output <- paste0(directory_results, "test/")
+        
+      }
+      
+    } else {
+      
+      output <- directory_results
+      
+    }
     
   } else {
     
@@ -91,7 +107,23 @@ get_path_results_raw <- function(type_model,
       
     } else if (option == "short_directory_filename") {
       
-      output <- paste0(directory_results, output_filename)
+      if (type_period != "NONE") {
+        
+        if (type_period == "train") {
+          
+          output <- paste0(directory_results, "train/", output_filename)
+          
+        } else {
+          
+          output <- paste0(directory_results, "test/", output_filename)
+          
+        }
+        
+      } else {
+        
+        output <- paste0(directory_results, output_filename)
+        
+      }
       
     } else {
       
@@ -106,8 +138,8 @@ get_path_results_raw <- function(type_model,
 }
 
 
-# `option`: Either `filename`, `long_directory`, `long_directory_filename`, `short_directory` or `short_directory_filename`.
-# Default: `filename`
+# `option`: Either "filename", "long_directory", "long_directory_filename", "short_directory" or "short_directory_filename".
+# Default: "filename"
 
 get_path_results_lr_coefficients <- function(number_xy,
                                              number_combination_features,
@@ -164,6 +196,9 @@ get_path_results_lr_coefficients <- function(number_xy,
 }
 
 
+# `option`: Either "filename", "directory" or "directory_filename".
+# Default: "filename"
+
 get_path_results_forecasts <- function(type_model,
                                        number_xy,
                                        number_combination_features = "NONE",
@@ -171,38 +206,71 @@ get_path_results_forecasts <- function(type_model,
                                        number_grid_combinations_kNp_dates_train_test = "NONE",
                                        number_hyp_par_grid = "NONE",
                                        type_period = "test",
-                                       directory_results = Directory_Results) {
+                                       directory_results = Directory_Results,
+                                       option = "filename") {
   
-  output_filename <- get_file_name_model_data_params_short(type_model = type_model,
-                                                           number_xy = number_xy,
-                                                           number_combination_features = number_combination_features,
-                                                           name_data_set = name_data_set,
-                                                           number_grid_combinations_kNp_dates_train_test = number_grid_combinations_kNp_dates_train_test,
-                                                           number_hyp_par_grid = number_hyp_par_grid)
-  
-  output <- paste0(directory_results,
-                   type_model, "/",
-                   number_xy, "/")
-  
-  if (type_model != "locf") {
+  if (option != "directory") {
     
-    output <- paste0(output,
-                     number_combination_features, "/",
-                     name_data_set, "/")
+    output_filename_0 <- get_file_name_model_data_params_short(type_model = type_model,
+                                                               number_xy = number_xy,
+                                                               number_combination_features = number_combination_features,
+                                                               name_data_set = name_data_set,
+                                                               number_grid_combinations_kNp_dates_train_test = number_grid_combinations_kNp_dates_train_test,
+                                                               number_hyp_par_grid = number_hyp_par_grid)
+    
+    if (type_period != "NONE") {
+      
+      if (type_period == "train") {
+        
+        output_filename <- paste0("results_forecast_", output_filename_0, "_train.csv")
+        
+      } else {
+        
+        output_filename <- paste0("results_forecast_", output_filename_0, "_test.csv")
+        
+      }
+      
+    }
     
   }
   
-  if (type_period == "train") {
+  if (option == "directory" | option == "directory_filename") {
     
-    output <- paste0(output,
-                     "train/",
-                     "results_forecast_", output_filename, "_train.csv")
+    output_directory <- paste0(directory_results, type_model, "/", number_xy, "/")
+    
+    if (type_model != "locf") {
+      
+      output_directory <- paste0(output_directory, number_combination_features, "/", name_data_set, "/")
+      
+    }
+    
+    if (type_period != "NONE") {
+      
+      if (type_period == "train") {
+        
+        output_directory <- paste0(output_directory, "train/")
+        
+      } else {
+        
+        output_directory <- paste0(output_directory, "test/")
+        
+      }
+      
+    }
+    
+  }
+  
+  if (option == "directory") {
+    
+    output <- output_directory
+    
+  } else if (option == "directory_filename") {
+    
+    output <- paste0(output_directory, output_filename)
     
   } else {
     
-    output <- paste0(output,
-                     "test/",
-                     "results_forecast_", output_filename, "_test.csv")
+    output <- output_filename
     
   }
   

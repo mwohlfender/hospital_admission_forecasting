@@ -23,9 +23,11 @@ for (ii in 1:length(list_jobs_apply_lr)) {
                    number_dates_train_test = grid_combinations_data_kNp_dates_hyp_ii$number_dates_train_test[jj],
                    number_hyp_par_grid_lr = grid_combinations_data_kNp_dates_hyp_ii$number_hyp_par_grid[jj],
                    number_hyp_par_subgrid_lr = grid_combinations_data_kNp_dates_hyp_ii$number_hyp_par_subgrid[jj],
-                   directory_data = paste0(Directory_Data, Subdirectory_Data_Feature_sets),
-                   directory_results = Directory_Results,
-                   option_path = "long",
+                   directory_parameters = paste0(Directory_Computing_Jobs, list_jobs_apply_lr[ii], "/", Subdirectory_Jobs_Parameters),
+                   directory_data = paste0(Directory_Computing_Jobs, list_jobs_apply_lr[ii], "/", Subdirectory_Jobs_Data),
+                   option_paths_data = "short",
+                   directory_results = paste0(Directory_Computing_Jobs, list_jobs_apply_lr[ii], "/", Subdirectory_Jobs_Results),
+                   option_path_results = "short",
                    do_new = Bool_Apply_Models_Do_New)
     
   }

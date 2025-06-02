@@ -62,7 +62,7 @@ fun_create_grid_hyp_params_lstm <- function(number_hyp_par_grid,
                                           loss_function = loss_function_range,
                                           nepochs = nepochs_range)
     
-    parameters_grid_lstm <- rbind(parameters_grid_lstm_1, parameters_grid_lstm_2)
+    parameters_grid_lstm <- bind_rows(parameters_grid_lstm_1, parameters_grid_lstm_2)
     
     # create directory to store output (if it does not already exist)
     if (!(file.exists(paste0(Directory_Parameters, Subdirectory_Parameters_Hyperparameters, "lstm/", number_hyp_par_grid)))) {

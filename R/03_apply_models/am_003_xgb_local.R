@@ -20,11 +20,13 @@ apply_model_xgb(number_xy = parameters_data_kNp_dates_hyp$number_xy,
                 number_dates_train_test = parameters_data_kNp_dates_hyp$number_dates_train_test,
                 number_hyp_par_grid_xgb = parameters_data_kNp_dates_hyp$number_hyp_par_grid,
                 number_hyp_par_subgrid_xgb = parameters_data_kNp_dates_hyp$number_hyp_par_subgrid,
+                bool_summarize_results = FALSE,
                 bool_pred_train = TRUE,
                 bool_pred_test = TRUE,
-                directory_parameters = Directory_Parameters,
-                directory_data = paste0(Directory_Data, Subdirectory_Data_Feature_sets),
-                directory_results = Directory_Results,
-                option_path_results = "long")
+                directory_parameters = paste0(Directory_Computing_Jobs, number_job_array, "/", Subdirectory_Jobs_Parameters),
+                directory_data = paste0(Directory_Computing_Jobs, number_job_array, "/", Subdirectory_Jobs_Data),
+                directory_results = paste0(Directory_Computing_Jobs, number_job_array, "/", Subdirectory_Jobs_Results),
+                option_path_results = "short",
+                do_new = Bool_Apply_Models_Do_New)
 
 

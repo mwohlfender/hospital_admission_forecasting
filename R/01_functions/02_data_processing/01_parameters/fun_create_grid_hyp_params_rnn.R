@@ -21,17 +21,17 @@
 # The grid has ten columns: iteration, nlayers, nneurons_one, nneurons_two, act_function_one, act_function_two,
 # optimizer, learning_rate, loss_function and nepochs
 fun_create_grid_hyp_params_rnn <- function(number_hyp_par_grid,
-                                          n_iterations,
-                                          size_limit_subgrids,
-                                          nneurons_one_range,
-                                          nneurons_two_range,
-                                          act_function_one_range,
-                                          act_function_two_range,
-                                          optimizer_range,
-                                          learning_rate_range,
-                                          loss_function_range,
-                                          nepochs_range,
-                                          do_new = Bool_Define_Parameters_Do_New) {
+                                           n_iterations,
+                                           size_limit_subgrids,
+                                           nneurons_one_range,
+                                           nneurons_two_range,
+                                           act_function_one_range,
+                                           act_function_two_range,
+                                           optimizer_range,
+                                           learning_rate_range,
+                                           loss_function_range,
+                                           nepochs_range,
+                                           do_new = Bool_Define_Parameters_Do_New) {
   
   # determine path of output
   path_output_parameter_grid <- paste0(Directory_Parameters, Subdirectory_Parameters_Hyperparameters, "rnn/", str_pad(number_hyp_par_grid, 3, pad = "0"),
@@ -41,28 +41,28 @@ fun_create_grid_hyp_params_rnn <- function(number_hyp_par_grid,
     
     # create parameter grid
     parameters_grid_rnn_1 <- expand.grid(iteration = 1:n_iterations,
-                                        nlayers = 1,
-                                        nneurons_one = nneurons_one_range,
-                                        nneurons_two = 0,
-                                        act_function_one = act_function_one_range,
-                                        act_function_two = "none",
-                                        optimizer = optimizer_range,
-                                        learning_rate = learning_rate_range,
-                                        loss_function = loss_function_range,
-                                        nepochs = nepochs_range)
+                                         nlayers = 1,
+                                         nneurons_one = nneurons_one_range,
+                                         nneurons_two = 0,
+                                         act_function_one = act_function_one_range,
+                                         act_function_two = "none",
+                                         optimizer = optimizer_range,
+                                         learning_rate = learning_rate_range,
+                                         loss_function = loss_function_range,
+                                         nepochs = nepochs_range)
     
     parameters_grid_rnn_2 <- expand.grid(iteration = 1:n_iterations,
-                                        nlayers = 2,
-                                        nneurons_one = nneurons_one_range,
-                                        nneurons_two = nneurons_two_range,
-                                        act_function_one = act_function_one_range,
-                                        act_function_two = act_function_two_range,
-                                        optimizer = optimizer_range,
-                                        learning_rate = learning_rate_range,
-                                        loss_function = loss_function_range,
-                                        nepochs = nepochs_range)
+                                         nlayers = 2,
+                                         nneurons_one = nneurons_one_range,
+                                         nneurons_two = nneurons_two_range,
+                                         act_function_one = act_function_one_range,
+                                         act_function_two = act_function_two_range,
+                                         optimizer = optimizer_range,
+                                         learning_rate = learning_rate_range,
+                                         loss_function = loss_function_range,
+                                         nepochs = nepochs_range)
     
-    parameters_grid_rnn <- rbind(parameters_grid_rnn_1, parameters_grid_rnn_2)
+    parameters_grid_rnn <- bind_rows(parameters_grid_rnn_1, parameters_grid_rnn_2)
     
     # create directory to store output (if it does not already exist)
     if (!(file.exists(paste0(Directory_Parameters, Subdirectory_Parameters_Hyperparameters, "rnn/", number_hyp_par_grid)))) {

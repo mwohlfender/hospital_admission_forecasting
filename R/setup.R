@@ -8,7 +8,7 @@ library(dplyr)
 library(tidyr)
 library(readr)
 library(stringr)
-# library(tibble)
+library(tibble)
 # library(tidyselect)
 # 
 # # colors
@@ -59,8 +59,8 @@ library(scales)
 
 
 
-# set up python environment (NEEDS TO BE ADAPTED) ----
-reticulate::use_python("PATH", required = TRUE)
+# set up python environment (NEEDS TO BE ADAPTED)----
+reticulate::use_python("DIRECTORY", required = TRUE)
 reticulate::use_condaenv(condaenv = "NAME")
 
 
@@ -75,7 +75,7 @@ source("R/setup_global_variables.R")
 
 # source R functions ----
 path_script_R <- "R/01_functions/"
-files_R <- grep(dir(path = path_script_R, recursive = TRUE), pattern = "_old", invert = TRUE, value = TRUE)
+files_R <- dir(path = path_script_R, recursive = TRUE)
 lapply(X = files_R, FUN = function(x) {source(paste0(path_script_R, x), echo = FALSE)})
 
 

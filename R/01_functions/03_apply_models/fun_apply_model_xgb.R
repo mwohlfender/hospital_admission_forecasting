@@ -27,13 +27,14 @@ apply_model_xgb <- function(number_xy,
                             number_dates_train_test,
                             number_hyp_par_grid_xgb,
                             number_hyp_par_subgrid_xgb,
+                            bool_summarize_results = FALSE,
                             bool_pred_train = FALSE,
                             bool_pred_test = FALSE,
-                            directory_data = Directory_Data,
-                            directory_parameters = Directory_Parameters,
-                            directory_results = Directory_Results,
-                            option_path_data = "NONE",
-                            option_path_results = "long",
+                            directory_parameters,
+                            directory_data,
+                            option_paths_data = "short",
+                            directory_results,
+                            option_path_results = "short",
                             do_new = FALSE) {
   
   # determine directory of output
@@ -100,42 +101,46 @@ apply_model_xgb <- function(number_xy,
                               number_hyp_par_subgrid_xgb = rep(x = number_hyp_par_subgrid_xgb, times = n_par_combs_xgb))
     
     # read training data
-    data_train <- read_csv(file = get_path_data_train(directory_data = directory_data,
-                                                      number_xy = number_xy,
-                                                      number_combination_features = number_combination_features,
-                                                      name_data_set = name_data_set,
-                                                      number_combination_kNp = number_combination_kNp,
-                                                      group_dates_train_test = group_dates_train_test,
-                                                      number_dates_train_test = number_dates_train_test,
-                                                      option = option_path_data))
+    data_train <- read_csv(file = get_path_features_target(number_xy = number_xy,
+                                                           number_combination_features = number_combination_features,
+                                                           name_data_set = name_data_set,
+                                                           number_combination_kNp = number_combination_kNp,
+                                                           group_dates_train_test = group_dates_train_test,
+                                                           number_dates_train_test = number_dates_train_test,
+                                                           option_output = "features_train",
+                                                           directory_data = directory_data,
+                                                           option_path = paste0(option_paths_data, "_directory_filename")))
     
-    target_train <- read_csv(file = get_path_target_train(directory_data = directory_data,
-                                                          number_xy = number_xy,
+    target_train <- read_csv(file = get_path_features_target(number_xy = number_xy,
+                                                             number_combination_features = number_combination_features,
+                                                             name_data_set = name_data_set,
+                                                             number_combination_kNp = number_combination_kNp,
+                                                             group_dates_train_test = group_dates_train_test,
+                                                             number_dates_train_test = number_dates_train_test,
+                                                             option_output = "target_train",
+                                                             directory_data = directory_data,
+                                                             option_path = paste0(option_paths_data, "_directory_filename")))
+    
+    # read testing data
+    data_test <- read_csv(file = get_path_features_target(number_xy = number_xy,
                                                           number_combination_features = number_combination_features,
                                                           name_data_set = name_data_set,
                                                           number_combination_kNp = number_combination_kNp,
                                                           group_dates_train_test = group_dates_train_test,
                                                           number_dates_train_test = number_dates_train_test,
-                                                          option = option_path_data))
+                                                          option_output = "features_test",
+                                                          directory_data = directory_data,
+                                                          option_path = paste0(option_paths_data, "_directory_filename")))
     
-    # read testing data
-    data_test <- read_csv(file = get_path_data_test(directory_data = directory_data,
-                                                    number_xy = number_xy,
-                                                    number_combination_features = number_combination_features,
-                                                    name_data_set = name_data_set,
-                                                    number_combination_kNp = number_combination_kNp,
-                                                    group_dates_train_test = group_dates_train_test,
-                                                    number_dates_train_test = number_dates_train_test,
-                                                    option = option_path_data))
-    
-    target_test <- read_csv(file = get_path_target_test(directory_data = directory_data,
-                                                        number_xy = number_xy,
-                                                        number_combination_features = number_combination_features,
-                                                        name_data_set = name_data_set,
-                                                        number_combination_kNp = number_combination_kNp,
-                                                        group_dates_train_test = group_dates_train_test,
-                                                        number_dates_train_test = number_dates_train_test,
-                                                        option = option_path_data))
+    target_test <- read_csv(file = get_path_features_target(number_xy = number_xy,
+                                                            number_combination_features = number_combination_features,
+                                                            name_data_set = name_data_set,
+                                                            number_combination_kNp = number_combination_kNp,
+                                                            group_dates_train_test = group_dates_train_test,
+                                                            number_dates_train_test = number_dates_train_test,
+                                                            option_output = "target_test",
+                                                            directory_data = directory_data,
+                                                            option_path = paste0(option_paths_data, "_directory_filename")))
     
     
     # format data for XGBoost ----
@@ -225,7 +230,7 @@ apply_model_xgb <- function(number_xy,
     
     
     # define tibble `output` (`parameters_grid`, `grid_hyp_params_xgb`, `xgb_rmse` and predictions (if stored)) ----
-    output <- cbind(parameters_grid, grid_hyp_params_xgb, xgb_rmse)
+    output <- bind_cols(parameters_grid, grid_hyp_params_xgb, xgb_rmse)
     
     if (bool_pred_train) {
       
@@ -234,7 +239,7 @@ apply_model_xgb <- function(number_xy,
       names_output_train <- unlist(lapply(X = 1:length_training_period,
                                           FUN = function(x) paste0("pred_day_train_", str_pad(x, ceiling(log(length_training_period, base=10)), pad = "0"))))
       
-      output <- cbind(output, as_tibble(matrix(data = t(predictions_xgb_train), nrow = n_par_combs_xgb, ncol = length_training_period, dimnames = list(NULL, names_output_train))))
+      output <- bind_cols(output, as_tibble(matrix(data = t(predictions_xgb_train), nrow = n_par_combs_xgb, ncol = length_training_period, dimnames = list(NULL, names_output_train))))
       
     } 
     
@@ -245,17 +250,49 @@ apply_model_xgb <- function(number_xy,
       names_output_test <- unlist(lapply(X = 1:length_testing_period,
                                          FUN = function(x) paste0("pred_day_test_", str_pad(x, ceiling(log(length_testing_period, base=10)), pad = "0"))))
       
-      output <- cbind(output, as_tibble(matrix(data = t(predictions_xgb_test), nrow = n_par_combs_xgb, ncol = length_testing_period, dimnames = list(NULL, names_output_test))))
+      output <- bind_cols(output, as_tibble(matrix(data = t(predictions_xgb_test), nrow = n_par_combs_xgb, ncol = length_testing_period, dimnames = list(NULL, names_output_test))))
       
-    } 
+    }
     
+    if (bool_summarize_results & (bool_pred_train | bool_pred_test)) {
+      
+      # determine columns of `output` to group by (all columns except those containing forecasts or root mean square errors)
+      columns_to_group_by <- output %>%
+        dplyr::select(-c("iteration")) %>%
+        dplyr::select(-starts_with("rmse_")) %>%
+        dplyr::select(-starts_with("pred_day_")) %>%
+        names()
+      
+      # group `results_xgb_ii_0` by columns specified in `columns_to_group_by` and determine mean estimate
+      output_summarized <- output %>%
+        group_by(across(all_of(columns_to_group_by))) %>%
+        summarize(across(starts_with("pred_day_"), \(x) mean(x, na.rm = TRUE))) %>%
+        ungroup() %>%
+        mutate(iteration = 0, rmse_train = 0, rmse_test = 0)
+      
+      for (ii in 1:nrow(output_summarized)) {
+        
+        forecast_train_ii <- as.numeric((output_summarized %>% dplyr::select(starts_with("pred_day_train_")))[ii,])
+        
+        output_summarized$rmse_train[ii] <- Metrics::rmse(actual = target_train %>% pull(y), predicted = forecast_train_ii)
+        
+        forecast_test_ii <- as.numeric((output_summarized %>% dplyr::select(starts_with("pred_day_test_")))[ii,])
+        
+        output_summarized$rmse_test[ii] <- Metrics::rmse(actual = target_test %>% pull(y), predicted = forecast_test_ii)
+        
+      }
+      
+      output <- output_summarized %>%
+        dplyr::select(all_of(columns_to_group_by), "iteration", starts_with("rmse_"), starts_with("pred_day_"))
+      
+    }
     
     # write `output` to csv file ----
     write_csv(x = output,
               file = path_output)
     
   }
-
+  
 }
 
 

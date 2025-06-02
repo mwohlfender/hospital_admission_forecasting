@@ -9,11 +9,10 @@ table_dates_train_test_overview <- read_csv(file = paste0(Directory_Parameters, 
 table_dates_train_test_detailed <- read_csv(file = paste0(Directory_Parameters, Path_Table_Dates_Train_Test_Detailed))
 
 # read time series of COVID-19-related hospital admissions
-data_features_001_000_base <- read_csv(file = get_path_data_features(directory_data = paste0(Directory_Data, Subdirectory_Data_Feature_sets),
-                                                                     number_xy = "001",
-                                                                     number_combination_features = "000",
-                                                                     name_data_set = "base",
-                                                                     option = "NONE"))
+data_features_001_000_base <- read_csv(file = get_path_features_target(number_xy = "001",
+                                                                       number_combination_features = "000",
+                                                                       name_data_set = "base",
+                                                                       option_path = "long_directory_filename"))
 
 
 # `data_features_001_000_base`: add x-coordinate used for creating plots

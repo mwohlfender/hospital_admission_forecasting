@@ -5,8 +5,8 @@ process_results_lstm <- function(number_job_array,
                                  directory_parameters = Directory_Parameters,
                                  directory_results_raw = Directory_Results,
                                  directory_results_processed = Directory_Results,
-                                 option_paths_data = "NONE",
-                                 option_paths_results_raw = "long_directory",
+                                 option_paths_data = "long",
+                                 option_paths_results_raw = "long",
                                  do_new = FALSE) {
   
   # read parameter grid of job array
@@ -40,62 +40,33 @@ process_results_lstm <- function(number_job_array,
     first()
   
   
-  # define directories where output shall be stored
-  directory_results_processed_general <- get_path_results_raw(type_model = "lstm",
-                                                              number_xy = number_xy,
-                                                              number_combination_features = number_combination_features,
-                                                              name_data_set = name_data_set,
-                                                              number_combination_kNp = "NONE",
-                                                              group_dates_train_test = "NONE",
-                                                              number_dates_train_test = "NONE",
-                                                              number_hyp_par_grid = "NONE",
-                                                              number_hyp_par_subgrid = "NONE",
-                                                              directory_results = directory_results_processed,
-                                                              type_period = "NONE",
-                                                              option = "long_directory")
+  # determine directories of output
+  directory_results_forecasts_lstm_train <- get_path_results_forecasts(directory_results = directory_results,
+                                                                       type_model = "lstm",
+                                                                       number_xy = number_xy,
+                                                                       number_combination_features = number_combination_features,
+                                                                       name_data_set = name_data_set,
+                                                                       type_period = "train",
+                                                                       option = "directory")
   
-  directory_results_processed_train <- get_path_results_raw(type_model = "lstm",
-                                                            number_xy = number_xy,
-                                                            number_combination_features = number_combination_features,
-                                                            name_data_set = name_data_set,
-                                                            number_combination_kNp = "NONE",
-                                                            group_dates_train_test = "NONE",
-                                                            number_dates_train_test = "NONE",
-                                                            number_hyp_par_grid = "NONE",
-                                                            number_hyp_par_subgrid = "NONE",
-                                                            directory_results = directory_results_processed,
-                                                            type_period = "train",
-                                                            option = "long_directory")
-  
-  directory_results_processed_test <- get_path_results_raw(type_model = "lstm",
-                                                           number_xy = number_xy,
-                                                           number_combination_features = number_combination_features,
-                                                           name_data_set = name_data_set,
-                                                           number_combination_kNp = "NONE",
-                                                           group_dates_train_test = "NONE",
-                                                           number_dates_train_test = "NONE",
-                                                           number_hyp_par_grid = "NONE",
-                                                           number_hyp_par_subgrid = "NONE",
-                                                           directory_results = directory_results_processed,
-                                                           type_period = "test",
-                                                           option = "long_directory")
+  directory_results_forecasts_lstm_test <- get_path_results_forecasts(directory_results = directory_results,
+                                                                      type_model = "lstm",
+                                                                      number_xy = number_xy,
+                                                                      number_combination_features = number_combination_features,
+                                                                      name_data_set = name_data_set,
+                                                                      type_period = "test",
+                                                                      option = "directory")
   
   # create directories to store output (if they do not already exist)
-  if (!(file.exists(directory_results_processed_general))) {
+  if (!(file.exists(directory_results_forecasts_lstm_train))) {
     
-    dir.create(file.path(directory_results_processed_general), recursive = TRUE)
-    
-  }
-  
-  if (!(file.exists(directory_results_processed_train))) {
-    
-    dir.create(file.path(directory_results_processed_train), recursive = TRUE)
+    dir.create(file.path(directory_results_forecasts_lstm_train), recursive = TRUE)
     
   }
   
-  if (!(file.exists(directory_results_processed_test))) {
+  if (!(file.exists(directory_results_forecasts_lstm_test))) {
     
-    dir.create(file.path(directory_results_processed_test), recursive = TRUE)
+    dir.create(file.path(directory_results_forecasts_lstm_test), recursive = TRUE)
     
   }
   
@@ -108,7 +79,8 @@ process_results_lstm <- function(number_job_array,
                                                                  name_data_set = name_data_set,
                                                                  number_grid_combinations_kNp_dates_train_test = number_grid_combinations_kNp_dates_train_test,
                                                                  number_hyp_par_grid = number_hyp_par_grid,
-                                                                 type_period = "train")
+                                                                 type_period = "train",
+                                                                 option = "directory_filename")
   
   path_results_lstm_forecast_test <- get_path_results_forecasts(directory_results = directory_results_processed,
                                                                 type_model = "lstm",
@@ -117,7 +89,8 @@ process_results_lstm <- function(number_job_array,
                                                                 name_data_set = name_data_set,
                                                                 number_grid_combinations_kNp_dates_train_test = number_grid_combinations_kNp_dates_train_test,
                                                                 number_hyp_par_grid = number_hyp_par_grid,
-                                                                type_period = "test")
+                                                                type_period = "test",
+                                                                option = "directory_filename")
   
   path_results_lstm_detailed <- get_path_results_processed_detailed(directory_results = directory_results_processed,
                                                                     type_model = "lstm",
@@ -149,17 +122,17 @@ process_results_lstm <- function(number_job_array,
     
     # files containing results
     directory_results_raw_model <- get_path_results_raw(type_model = "lstm",
-                                                  number_xy = number_xy,
-                                                  number_combination_features = number_combination_features,
-                                                  name_data_set = name_data_set,
-                                                  number_combination_kNp = "NONE",
-                                                  group_dates_train_test = "NONE",
-                                                  number_dates_train_test = "NONE",
-                                                  number_hyp_par_grid = "NONE",
-                                                  number_hyp_par_subgrid = "NONE",
-                                                  directory_results = directory_results_raw,
-                                                  type_period = "NONE",
-                                                  option = option_paths_results_raw )
+                                                        number_xy = number_xy,
+                                                        number_combination_features = number_combination_features,
+                                                        name_data_set = name_data_set,
+                                                        number_combination_kNp = "NONE",
+                                                        group_dates_train_test = "NONE",
+                                                        number_dates_train_test = "NONE",
+                                                        number_hyp_par_grid = "NONE",
+                                                        number_hyp_par_subgrid = "NONE",
+                                                        directory_results = directory_results_raw,
+                                                        type_period = "NONE",
+                                                        option = paste0(option_paths_results_raw, "_directory"))
     
     files_raw_results <- dir(path = directory_results_raw_model)
     
@@ -191,27 +164,25 @@ process_results_lstm <- function(number_job_array,
       
       if (length(file_names_results_ii) > 0) {
         
-        path_target_train_ii <- get_path_target_train(directory_data = directory_data,
-                                                      number_xy = number_xy,
-                                                      number_combination_features = number_combination_features,
-                                                      name_data_set = name_data_set,
-                                                      number_combination_kNp = grid_combinations_kNp_dates_train_test$number_combination_kNp[ii],
-                                                      group_dates_train_test = grid_combinations_kNp_dates_train_test$group_dates_train_test[ii],
-                                                      number_dates_train_test = grid_combinations_kNp_dates_train_test$number_dates_train_test[ii],
-                                                      option = option_paths_data)
+        target_train_ii <- read_csv(file = get_path_features_target(number_xy = number_xy,
+                                                                    number_combination_features = number_combination_features,
+                                                                    name_data_set = name_data_set,
+                                                                    number_combination_kNp = grid_combinations_kNp_dates_train_test$number_combination_kNp[ii],
+                                                                    group_dates_train_test = grid_combinations_kNp_dates_train_test$group_dates_train_test[ii],
+                                                                    number_dates_train_test = grid_combinations_kNp_dates_train_test$number_dates_train_test[ii],
+                                                                    option_output = "target_train",
+                                                                    directory_data = directory_data,
+                                                                    option_path = paste0(option_paths_data, "_directory_filename")))
         
-        target_train_ii <- read_csv(file = path_target_train_ii)
-        
-        path_target_test_ii <- get_path_target_test(directory_data = directory_data,
-                                                    number_xy = number_xy,
-                                                    number_combination_features = number_combination_features,
-                                                    name_data_set = name_data_set,
-                                                    number_combination_kNp = grid_combinations_kNp_dates_train_test$number_combination_kNp[ii],
-                                                    group_dates_train_test = grid_combinations_kNp_dates_train_test$group_dates_train_test[ii],
-                                                    number_dates_train_test = grid_combinations_kNp_dates_train_test$number_dates_train_test[ii],
-                                                    option = option_paths_data)
-        
-        target_test_ii <- read_csv(file = path_target_test_ii)
+        target_test_ii <- read_csv(file = get_path_features_target(number_xy = number_xy,
+                                                                   number_combination_features = number_combination_features,
+                                                                   name_data_set = name_data_set,
+                                                                   number_combination_kNp = grid_combinations_kNp_dates_train_test$number_combination_kNp[ii],
+                                                                   group_dates_train_test = grid_combinations_kNp_dates_train_test$group_dates_train_test[ii],
+                                                                   number_dates_train_test = grid_combinations_kNp_dates_train_test$number_dates_train_test[ii],
+                                                                   option_output = "target_test",
+                                                                   directory_data = directory_data,
+                                                                   option_path = paste0(option_paths_data, "_directory_filename")))
         
         
         results_lstm_ii_0 <- NULL
@@ -219,13 +190,13 @@ process_results_lstm <- function(number_job_array,
         for (file_name in file_names_results_ii) {
           
           results_temp <- tibble(data.table::fread(paste0(directory_results_raw_model, file_name),
-                                       header = TRUE,
-                                       colClasses = c("number_xy" = "character",
-                                                      "number_combination_features" = "character",
-                                                      "number_combination_kNp" = "character",
-                                                      "group_dates_train_test" = "character",
-                                                      "number_dates_train_test" = "character",
-                                                      "number_hyp_par_grid_lstm" = "character")))
+                                                   header = TRUE,
+                                                   colClasses = c("number_xy" = "character",
+                                                                  "number_combination_features" = "character",
+                                                                  "number_combination_kNp" = "character",
+                                                                  "group_dates_train_test" = "character",
+                                                                  "number_dates_train_test" = "character",
+                                                                  "number_hyp_par_grid_lstm" = "character")))
           
           results_lstm_ii_0 <- bind_rows(results_lstm_ii_0, results_temp)
           

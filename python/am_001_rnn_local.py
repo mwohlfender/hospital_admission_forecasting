@@ -13,18 +13,27 @@ from keras.optimizers import Adam, SGD, RMSprop
 from keras.losses import mean_squared_error
 from keras.metrics import RootMeanSquaredError
 
+
 # number of array of computing jobs (NEEDS TO BE ADAPTED)
 number_job_array = "032"
 
-# NEEDS TO BE ADAPTED
+# number of computing job within array `number_job_array` (NEEDS TO BE ADAPTED)
 index = 1
+
+# local directory where files related to computing jobs done on UBELIX, the HPC cluster of the University of Bern, are stored (NEEDS TO BE ADAPTED)
+directory_computing_jobs = "C:/Users/mw22f082/Documents_MW/projects/defeat_covid/hospital_admission_forecasting/local_files/hospital_admission_forecasting/jobs/"
 
 
 bool_pred_train = True
 bool_pred_test = True
 
 
-parameters_data_kNp_dates_hyp = pd.read_csv(("parameters/05_job_setup/grid_combinations_data_kNp_dates_hyp_" + number_job_array + ".csv"), converters={"number_xy": str, "number_combination_features": str, "number_combination_kNp": str, "group_dates_train_test": str, "number_dates_train_test": str, "number_hyp_par_grid": str}).iloc[int(index)-1,:]
+directory_parameters <- directory_computing_jobs + number_job_array + "/parameters/"
+directory_data = directory_computing_jobs + number_job_array + "/data/"
+directory_results = directory_computing_jobs + number_job_array + "/results/"
+
+
+parameters_data_kNp_dates_hyp = pd.read_csv((directory_parameters + "05_job_setup/grid_combinations_data_kNp_dates_hyp_" + number_job_array + ".csv"), converters={"number_xy": str, "number_combination_features": str, "number_combination_kNp": str, "group_dates_train_test": str, "number_dates_train_test": str, "number_hyp_par_grid": str}).iloc[int(index)-1,:]
 
 number_xy = parameters_data_kNp_dates_hyp["number_xy"]
 number_combination_features = parameters_data_kNp_dates_hyp["number_combination_features"]
@@ -36,17 +45,13 @@ number_hyp_par_grid_rnn = parameters_data_kNp_dates_hyp["number_hyp_par_grid"]
 number_hyp_par_subgrid_rnn = parameters_data_kNp_dates_hyp["number_hyp_par_subgrid"]
 
 
-directory_data = "data/03_feature_sets/" + number_xy + "/" + number_combination_features + "/" + name_data_set + "/"
-directory_results = "results/rnn/" + number_xy + "/" + number_combination_features + "/" + name_data_set + "/"
-
-
 if number_hyp_par_subgrid_rnn == 0:
     
-    grid_hyp_params_rnn = pd.read_csv(("parameters/04_hyperparameters/rnn/" + number_hyp_par_grid_rnn + "/hyp_par_rnn_" + number_hyp_par_grid_rnn + "_param_grid.csv"))
+    grid_hyp_params_rnn = pd.read_csv((directory_parameters + "04_hyperparameters/rnn/" + number_hyp_par_grid_rnn + "/hyp_par_rnn_" + number_hyp_par_grid_rnn + "_param_grid.csv"))
     
 else:
     
-    grid_hyp_params_rnn = pd.read_csv(("parameters/04_hyperparameters/rnn/" + number_hyp_par_grid_rnn + "/hyp_par_rnn_" + number_hyp_par_grid_rnn + "_param_grid_" + str(number_hyp_par_subgrid_rnn) + ".csv"))
+    grid_hyp_params_rnn = pd.read_csv((directory_parameters + "04_hyperparameters/rnn/" + number_hyp_par_grid_rnn + "/hyp_par_rnn_" + number_hyp_par_grid_rnn + "_param_grid_" + str(number_hyp_par_subgrid_rnn) + ".csv"))
 
 
 # determine how many different combinations of hyper parameters will be tested
@@ -69,12 +74,12 @@ parameters_grid = pd.DataFrame({"number_xy": [number_xy] * n_par_combs_rnn,
 "number_hyp_par_subgrid_rnn": [number_hyp_par_subgrid_rnn] * n_par_combs_rnn})
 
 # read training data
-data_train = pd.read_csv(directory_data + "data_train_" + full_name_data_set + ".csv").sort_index(axis = 1)
-target_train = pd.read_csv(directory_data + "target_train_" + full_name_data_set + ".csv")
+data_train = pd.read_csv(directory_data + "features/train/features_train_" + full_name_data_set + ".csv").sort_index(axis = 1)
+target_train = pd.read_csv(directory_data + "target/train/target_train_" + full_name_data_set + ".csv")
 
 # read testing data
-data_test = pd.read_csv(directory_data + "data_test_" + full_name_data_set + ".csv").sort_index(axis = 1)
-target_test = pd.read_csv(directory_data + "target_test_" + full_name_data_set + ".csv")
+data_test = pd.read_csv(directory_data + "features/test/features_test_" + full_name_data_set + ".csv").sort_index(axis = 1)
+target_test = pd.read_csv(directory_data + "target/test/target_test_" + full_name_data_set + ".csv")
 
 
 

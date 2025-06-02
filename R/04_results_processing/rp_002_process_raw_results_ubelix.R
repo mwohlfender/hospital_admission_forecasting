@@ -48,8 +48,8 @@ if (table_jobs_process_results$type_model[index] == "lr") {
                      directory_parameters = paste0(directory_ubelix, table_jobs_process_results$number_job_array[index], "/", Directory_Parameters),
                      directory_results_raw = paste0(directory_ubelix, table_jobs_process_results$number_job_array[index], "/", Directory_Results),
                      directory_results_processed = Directory_Results,
-                     option_paths_data = "short_directory_filename",
-                     option_paths_results_raw = "short_directory",
+                     option_paths_data = "short",
+                     option_paths_results_raw = "short",
                      do_new = do_new_process_jobs)
   
 }
@@ -62,8 +62,8 @@ if (table_jobs_process_results$type_model[index] == "lstm") {
                        directory_parameters = paste0(directory_ubelix, table_jobs_process_results$number_job_array[index], "/", Directory_Parameters),
                        directory_results_raw = paste0(directory_ubelix, table_jobs_process_results$number_job_array[index], "/", Directory_Results),
                        directory_results_processed = Directory_Results,
-                       option_paths_data = "short_directory_filename",
-                       option_paths_results_raw = "short_directory",
+                       option_paths_data = "short",
+                       option_paths_results_raw = "short",
                        do_new = do_new_process_jobs)
   
 }
@@ -75,8 +75,8 @@ if (table_jobs_process_results$type_model[index] == "rnn") {
                       directory_parameters = paste0(directory_ubelix, table_jobs_process_results$number_job_array[index], "/", Directory_Parameters),
                       directory_results_raw = paste0(directory_ubelix, table_jobs_process_results$number_job_array[index], "/", Directory_Results),
                       directory_results_processed = Directory_Results,
-                      option_paths_data = "short_directory_filename",
-                      option_paths_results_raw = "short_directory",
+                      option_paths_data = "short",
+                      option_paths_results_raw = "short",
                       do_new = do_new_process_jobs)
   
 }
@@ -88,8 +88,8 @@ if (table_jobs_process_results$type_model[index] == "xgb") {
                       directory_parameters = paste0(directory_ubelix, table_jobs_process_results$number_job_array[index], "/", Directory_Parameters),
                       directory_results_raw = paste0(directory_ubelix, table_jobs_process_results$number_job_array[index], "/", Directory_Results),
                       directory_results_processed = Directory_Results,
-                      option_paths_data = "short_directory_filename",
-                      option_paths_results_raw = "short_directory",
+                      option_paths_data = "short",
+                      option_paths_results_raw = "short",
                       do_new = do_new_process_jobs)
   
 }

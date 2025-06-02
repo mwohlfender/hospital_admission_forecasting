@@ -11,8 +11,21 @@ Bool_Create_Plots_Do_New <- FALSE
 
 # set paths ----
 
-# directory where files of computing jobs done on UBELIX are stored (NEEDS TO BE ADJUSTED)
-Directory_Ubelix <- "DIRECTORY/"
+# local directory (outside folder that is synced with GitHub) where especially model output files are stored
+# the volume of model output files is too large to store all of them on GitHub
+Directory_Local_Files <- "DIRECTORY/"
+
+# local directory where files related to computing jobs done on UBELIX, the HPC cluster of the University of Bern, are stored 
+Directory_Computing_Jobs <- paste0(Directory_Local_Files, "jobs/")
+
+# subdirectory within the directory of a computing job stored in `Directory_Computing_Jobs` where data files are  stored
+Subdirectory_Jobs_Data <- "data/"
+
+# subdirectory within the directory of a computing job stored in `Directory_Computing_Jobs` where parameter files are  stored
+Subdirectory_Jobs_Parameters <- "parameters/"
+
+# subdirectory within the directory of a computing job stored in `Directory_Computing_Jobs` where results files are  stored
+Subdirectory_Jobs_Results <- "results/"
 
 
 
@@ -121,12 +134,13 @@ Path_Table_Jobs_Results_Processing <- paste0(Subdirectory_Parameters_Job_Results
 
 
 # directory where results files are stored
-Directory_Results <- paste0("results/")
+Directory_Results <- "results/"
 
 
 
 # directory where plots are stored
 Directory_Plots <- "plots/"
+
 
 # subdirectory within `Directory_Plots` where plots of data are stored
 Subdirectory_Plots_Data <- "data/"

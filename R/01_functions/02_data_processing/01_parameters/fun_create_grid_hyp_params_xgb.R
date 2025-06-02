@@ -84,12 +84,13 @@ fun_create_grid_hyp_params_xgb <- function(number_hyp_par_grid,
     index <- 1
     
     # split `parameters_grid_xgb` to smaller grids if `parameters_grid_xgb` has more than `size_limit_subgrids` lines
-    if (nrow(parameters_grid_xgb) > size_limit_subgrids) {
+    
+    if (nrow(parameters_grid_xgb) > size_limit_subgrids) { 
       
-      for (iteration_0 in 1:n_iterations) {
+      for (nrounds_0 in nrounds_range) {
         
         parameters_grid_xgb_split <- parameters_grid_xgb %>%
-          filter(iteration == iteration_0)
+          filter(nrounds == nrounds_0)
         
         if (nrow(parameters_grid_xgb_split) <= size_limit_subgrids) {
           
@@ -101,11 +102,11 @@ fun_create_grid_hyp_params_xgb <- function(number_hyp_par_grid,
           
         } else {
           
-          for (nrounds_0 in nrounds_range) {
+          for (eta_0 in eta_range) {
             
             parameters_grid_xgb_split <- parameters_grid_xgb %>%
-              filter(iteration == iteration_0,
-                     nrounds == nrounds_0)
+              filter(nrounds == nrounds_0,
+                     eta == eta_0)
             
             if (nrow(parameters_grid_xgb_split) <= size_limit_subgrids) {
               
@@ -117,12 +118,12 @@ fun_create_grid_hyp_params_xgb <- function(number_hyp_par_grid,
               
             } else {
               
-              for (eta_0 in eta_range) {
+              for (gamma_0 in gamma_range) {
                 
                 parameters_grid_xgb_split <- parameters_grid_xgb %>%
-                  filter(iteration == iteration_0,
-                         nrounds == nrounds_0,
-                         eta == eta_0)
+                  filter(nrounds == nrounds_0,
+                         eta == eta_0,
+                         gamma == gamma_0)
                 
                 if (nrow(parameters_grid_xgb_split) <= size_limit_subgrids) {
                   
@@ -134,13 +135,13 @@ fun_create_grid_hyp_params_xgb <- function(number_hyp_par_grid,
                   
                 } else {
                   
-                  for (gamma_0 in gamma_range) {
+                  for (max_depth_0 in max_depth_range) {
                     
                     parameters_grid_xgb_split <- parameters_grid_xgb %>%
-                      filter(iteration == iteration_0,
-                             nrounds == nrounds_0,
+                      filter(nrounds == nrounds_0,
                              eta == eta_0,
-                             gamma == gamma_0)
+                             gamma == gamma_0,
+                             max_depth == max_depth_0)
                     
                     if (nrow(parameters_grid_xgb_split) <= size_limit_subgrids) {
                       
@@ -152,14 +153,14 @@ fun_create_grid_hyp_params_xgb <- function(number_hyp_par_grid,
                       
                     } else {
                       
-                      for (max_depth_0 in max_depth_range) {
+                      for (min_child_weight_0 in min_child_weight_range) {
                         
                         parameters_grid_xgb_split <- parameters_grid_xgb %>%
-                          filter(iteration == iteration_0,
-                                 nrounds == nrounds_0,
+                          filter(nrounds == nrounds_0,
                                  eta == eta_0,
                                  gamma == gamma_0,
-                                 max_depth == max_depth_0)
+                                 max_depth == max_depth_0,
+                                 min_child_weight == min_child_weight_0)
                         
                         if (nrow(parameters_grid_xgb_split) <= size_limit_subgrids) {
                           
@@ -171,15 +172,15 @@ fun_create_grid_hyp_params_xgb <- function(number_hyp_par_grid,
                           
                         } else {
                           
-                          for (min_child_weight_0 in min_child_weight_range) {
+                          for (max_delta_step_0 in max_delta_step_range) {
                             
                             parameters_grid_xgb_split <- parameters_grid_xgb %>%
-                              filter(iteration == iteration_0,
-                                     nrounds == nrounds_0,
+                              filter(nrounds == nrounds_0,
                                      eta == eta_0,
                                      gamma == gamma_0,
                                      max_depth == max_depth_0,
-                                     min_child_weight == min_child_weight_0)
+                                     min_child_weight == min_child_weight_0,
+                                     max_delta_step == max_delta_step_0)
                             
                             if (nrow(parameters_grid_xgb_split) <= size_limit_subgrids) {
                               
@@ -191,16 +192,16 @@ fun_create_grid_hyp_params_xgb <- function(number_hyp_par_grid,
                               
                             } else {
                               
-                              for (max_delta_step_0 in max_delta_step_range) {
+                              for (lambda_0 in lambda_range) {
                                 
                                 parameters_grid_xgb_split <- parameters_grid_xgb %>%
-                                  filter(iteration == iteration_0,
-                                         nrounds == nrounds_0,
+                                  filter(nrounds == nrounds_0,
                                          eta == eta_0,
                                          gamma == gamma_0,
                                          max_depth == max_depth_0,
                                          min_child_weight == min_child_weight_0,
-                                         max_delta_step == max_delta_step_0)
+                                         max_delta_step == max_delta_step_0,
+                                         lambda == lambda_0)
                                 
                                 if (nrow(parameters_grid_xgb_split) <= size_limit_subgrids) {
                                   
@@ -212,50 +213,23 @@ fun_create_grid_hyp_params_xgb <- function(number_hyp_par_grid,
                                   
                                 } else {
                                   
-                                  for (lambda_0 in lambda_range) {
+                                  for (alpha_0 in alpha_range) {
                                     
                                     parameters_grid_xgb_split <- parameters_grid_xgb %>%
-                                      filter(iteration == iteration_0,
-                                             nrounds == nrounds_0,
+                                      filter(nrounds == nrounds_0,
                                              eta == eta_0,
                                              gamma == gamma_0,
                                              max_depth == max_depth_0,
                                              min_child_weight == min_child_weight_0,
                                              max_delta_step == max_delta_step_0,
-                                             lambda == lambda_0)
+                                             lambda == lambda_0,
+                                             alpha == alpha_0)
                                     
-                                    if (nrow(parameters_grid_xgb_split) <= size_limit_subgrids) {
-                                      
-                                      write_csv(x = parameters_grid_xgb_split,
-                                                file = paste0(Directory_Parameters, Subdirectory_Parameters_Hyperparameters, "xgb/", str_pad(number_hyp_par_grid, 3, pad = "0"),
-                                                              "/hyp_par_xgb_", str_pad(number_hyp_par_grid, 3, pad = "0"), "_param_grid_", index, ".csv"))
-                                      
-                                      index <- index + 1
-                                      
-                                    } else {
-                                      
-                                      for (alpha_0 in alpha_range) {
-                                        
-                                        parameters_grid_xgb_split <- parameters_grid_xgb %>%
-                                          filter(iteration == iteration_0,
-                                                 nrounds == nrounds_0,
-                                                 eta == eta_0,
-                                                 gamma == gamma_0,
-                                                 max_depth == max_depth_0,
-                                                 min_child_weight == min_child_weight_0,
-                                                 max_delta_step == max_delta_step_0,
-                                                 lambda == lambda_0,
-                                                 alpha == alpha_0)
-                                        
-                                        write_csv(x = parameters_grid_xgb_split,
-                                                  file = paste0(Directory_Parameters, Subdirectory_Parameters_Hyperparameters, "xgb/", str_pad(number_hyp_par_grid, 3, pad = "0"),
-                                                                "/hyp_par_xgb_", str_pad(number_hyp_par_grid, 3, pad = "0"), "_param_grid_", index, ".csv"))
-                                        
-                                        index <- index + 1
-                                        
-                                      }
-                                      
-                                    }
+                                    write_csv(x = parameters_grid_xgb_split,
+                                              file = paste0(Directory_Parameters, Subdirectory_Parameters_Hyperparameters, "xgb/", str_pad(number_hyp_par_grid, 3, pad = "0"),
+                                                            "/hyp_par_xgb_", str_pad(number_hyp_par_grid, 3, pad = "0"), "_param_grid_", index, ".csv"))
+                                    
+                                    index <- index + 1
                                     
                                   }
                                   
@@ -282,6 +256,7 @@ fun_create_grid_hyp_params_xgb <- function(number_hyp_par_grid,
             }
             
           }
+          
         }
         
       }

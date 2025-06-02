@@ -5,11 +5,10 @@ data_summary_features_numeric <- NULL
 
 precision_round_daily_mean <- 0.1
 
-data_hospitalizations_base <- read_csv(file = get_path_data_features(directory_data = paste0(Directory_Data, Subdirectory_Data_Feature_sets),
-                                                                     number_xy = "001",
-                                                                     number_combination_features = "000",
-                                                                     name_data_set = "base",
-                                                                     option = "NONE"))
+data_hospitalizations_base <- read_csv(file = get_path_features_target(number_xy = "001",
+                                                                       number_combination_features = "000",
+                                                                       name_data_set = "base",
+                                                                       option_path = "long_directory_filename"))
 
 data_summary_features_numeric <- data_summary_features_numeric %>%
   bind_rows(data_hospitalizations_base %>%
@@ -23,11 +22,10 @@ data_summary_features_numeric <- data_summary_features_numeric %>%
                         unit = "Patients"))
 
 
-data_hospitalizations_age <- read_csv(file = get_path_data_features(directory_data = paste0(Directory_Data, Subdirectory_Data_Feature_sets),
-                                                                    number_xy = "001",
-                                                                    number_combination_features = "000",
-                                                                    name_data_set = "age",
-                                                                    option = "NONE"))
+data_hospitalizations_age <- read_csv(file = get_path_features_target(number_xy = "001",
+                                                                      number_combination_features = "000",
+                                                                      name_data_set = "age",
+                                                                      option_path = "long_directory_filename"))
 
 data_summary_features_numeric <- data_summary_features_numeric %>%
   bind_rows(data_hospitalizations_age %>%
@@ -85,11 +83,10 @@ data_summary_features_numeric <- data_summary_features_numeric %>%
                         unit = "Patients"))
 
 
-data_features_001 <- read_csv(file = get_path_data_features(directory_data = paste0(Directory_Data, Subdirectory_Data_Feature_sets),
-                                                            number_xy = "001",
-                                                            number_combination_features = "001",
-                                                            name_data_set = "base",
-                                                            option = "NONE"))
+data_features_001 <- read_csv(file = get_path_features_target(number_xy = "001",
+                                                              number_combination_features = "001",
+                                                              name_data_set = "base",
+                                                              option_path = "long_directory_filename"))
 
 data_summary_features_numeric <- data_summary_features_numeric %>%
   bind_rows(data_features_001 %>%
@@ -103,11 +100,10 @@ data_summary_features_numeric <- data_summary_features_numeric %>%
                         unit = "Patients"))
 
 
-data_features_008 <- read_csv(file = get_path_data_features(directory_data = paste0(Directory_Data, Subdirectory_Data_Feature_sets),
-                                                            number_xy = "001",
-                                                            number_combination_features = "008",
-                                                            name_data_set = "base",
-                                                            option = "NONE"))
+data_features_008 <- read_csv(file = get_path_features_target(number_xy = "001",
+                                                              number_combination_features = "008",
+                                                              name_data_set = "base",
+                                                              option_path = "long_directory_filename"))
 
 data_summary_features_numeric <- data_summary_features_numeric %>%
   bind_rows(data_features_008 %>%
@@ -165,11 +161,10 @@ data_summary_features_numeric <- data_summary_features_numeric %>%
                         unit = "Patients"))
 
 
-data_features_007 <- read_csv(file = get_path_data_features(directory_data = paste0(Directory_Data, Subdirectory_Data_Feature_sets),
-                                                            number_xy = "001",
-                                                            number_combination_features = "007",
-                                                            name_data_set = "base",
-                                                            option = "NONE"))
+data_features_007 <- read_csv(file = get_path_features_target(number_xy = "001",
+                                                              number_combination_features = "007",
+                                                              name_data_set = "base",
+                                                              option_path = "long_directory_filename"))
 
 data_summary_features_numeric <- data_summary_features_numeric %>%
   bind_rows(data_features_007 %>%
@@ -227,11 +222,10 @@ data_summary_features_numeric <- data_summary_features_numeric %>%
                         unit = "Patients"))
 
 
-data_features_006 <- read_csv(file = get_path_data_features(directory_data = paste0(Directory_Data, Subdirectory_Data_Feature_sets),
-                                                            number_xy = "001",
-                                                            number_combination_features = "006",
-                                                            name_data_set = "base",
-                                                            option = "NONE"))
+data_features_006 <- read_csv(file = get_path_features_target(number_xy = "001",
+                                                              number_combination_features = "006",
+                                                              name_data_set = "base",
+                                                              option_path = "long_directory_filename"))
 
 data_summary_features_numeric <- data_summary_features_numeric %>%
   bind_rows(data_features_006 %>%
@@ -289,11 +283,10 @@ data_summary_features_numeric <- data_summary_features_numeric %>%
                         unit = "Patients"))
 
 
-data_features_002 <- read_csv(file = get_path_data_features(directory_data = paste0(Directory_Data, Subdirectory_Data_Feature_sets),
-                                                            number_xy = "001",
-                                                            number_combination_features = "002",
-                                                            name_data_set = "base",
-                                                            option = "NONE"))
+data_features_002 <- read_csv(file = get_path_features_target(number_xy = "001",
+                                                              number_combination_features = "002",
+                                                              name_data_set = "base",
+                                                              option_path = "long_directory_filename"))
 
 data_summary_features_numeric <- data_summary_features_numeric %>%
   bind_rows(data_features_002 %>%
@@ -307,11 +300,10 @@ data_summary_features_numeric <- data_summary_features_numeric %>%
                         unit = "Patients"))
 
 
-data_features_005 <- read_csv(file = get_path_data_features(directory_data = paste0(Directory_Data, Subdirectory_Data_Feature_sets),
-                                                            number_xy = "001",
-                                                            number_combination_features = "005",
-                                                            name_data_set = "base",
-                                                            option = "NONE"))
+data_features_005 <- read_csv(file = get_path_features_target(number_xy = "001",
+                                                              number_combination_features = "005",
+                                                              name_data_set = "base",
+                                                              option_path = "long_directory_filename"))
 
 data_summary_features_numeric <- data_summary_features_numeric %>%
   bind_rows(data_features_005 %>%
@@ -332,11 +324,10 @@ data_summary_features_character <- data_summary_features_numeric %>%
          max = as.character(formatC(max, big.mark = ",", big.interval = 3, digits = 0, format = "f")))
 
 
-data_features_004 <- read_csv(file = get_path_data_features(directory_data = paste0(Directory_Data, Subdirectory_Data_Feature_sets),
-                                                            number_xy = "001",
-                                                            number_combination_features = "004",
-                                                            name_data_set = "base",
-                                                            option = "NONE"))
+data_features_004 <- read_csv(file = get_path_features_target(number_xy = "001",
+                                                              number_combination_features = "004",
+                                                              name_data_set = "base",
+                                                              option_path = "long_directory_filename"))
 
 data_summary_features_numeric <- data_summary_features_numeric %>%
   bind_rows(data_features_004 %>%

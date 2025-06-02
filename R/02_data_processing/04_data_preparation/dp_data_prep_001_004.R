@@ -45,27 +45,27 @@ sequence_days <- seq(min_date, max_date, "day")
 
 
 # join `sequence_days` and `table_days_icd_u07_1_20200101_20230630`
-data_features_004_base <- tibble(date_day = sequence_days) %>%
+features_target_004_base <- tibble(date_day = sequence_days) %>%
   left_join(table_days_icd_u07_1_20200101_20230630 %>% dplyr::select(c("date_day", "icd10_code_U07_1")), by = "date_day") %>%
   mutate_if(is.numeric , replace_na, replace = 0) %>%
   dplyr::rename(c("x" = "icd10_code_U07_1"))
 
-# join `data_features_004_base` and `table_days_wastewater`
-data_features_004_base <- data_features_004_base %>%
+# join `features_target_004_base` and `table_days_wastewater`
+features_target_004_base <- features_target_004_base %>%
   left_join(table_days_wastewater %>% dplyr::select("date_day", "sars_cov2_rna"), by = "date_day")
 
 
 # create data sets and store them
-data_preparation_series_001(data_features = data_features_004_base,
+data_preparation_series_001(data_features = features_target_004_base,
                             number_combination_features = number_combination_features,
                             name_data_set = name_data_set,
                             table_parameters_kNp = table_parameters_kNp_filtered,
                             table_dates_train_test = table_dates_train_test_detailed_filtered,
                             remove_x = TRUE,
-                            overwrite = FALSE)
+                            overwrite = Bool_Data_Processing_Do_New)
 
 
-# `data_features_004_base`: add variable y (= y_{0,N} for all N present in `table_parameters_kNp`)
+# `features_target_004_base`: add variable y (= y_{0,N} for all N present in `table_parameters_kNp`)
 # y_{0,N}(t) = x(t) + x(t+1) + x(t+2) + ... + x(t+N-1)
 list_N <- table_parameters_kNp %>% pull(N) %>% unique()
 
@@ -73,7 +73,7 @@ for (ii in 1:length(list_N)) {
   
   name_new_column <- paste0("y_", str_pad(list_N[ii], 2, pad = "0"))
   
-  data_features_004_base <- data_features_004_base %>%
+  features_target_004_base <- features_target_004_base %>%
     dplyr::mutate(y=x) %>%
     timetk::tk_augment_leads(.value=y,
                              .lags=-seq(from = 0, to = list_N[ii] - 1, by = 1)) %>%
@@ -87,16 +87,16 @@ for (ii in 1:length(list_N)) {
 }
 
 
-# store `data_features_004_base`
-path_data_features_004_base <- get_path_data_features(directory_data = paste0(Directory_Data, Subdirectory_Data_Feature_sets),
-                                                      number_xy = number_xy,
-                                                      number_combination_features = number_combination_features,
-                                                      name_data_set = name_data_set)
+# store `features_target_004_base`
+path_features_target_004_base <- get_path_features_target(number_xy = number_xy,
+                                                          number_combination_features = number_combination_features,
+                                                          name_data_set = name_data_set,
+                                                          option_path = "long_directory_filename")
 
-if (!(file.exists(path_data_features_004_base)) | Bool_Data_Processing_Do_New) {
+if (!(file.exists(path_features_target_004_base)) | Bool_Data_Processing_Do_New) {
   
-  write_csv(x = data_features_004_base,
-            file = path_data_features_004_base)
+  write_csv(x = features_target_004_base,
+            file = path_features_target_004_base)
   
 }
 

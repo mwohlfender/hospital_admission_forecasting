@@ -18,6 +18,7 @@ from keras.metrics import RootMeanSquaredError
 # number of array of computing jobs (NEEDS TO BE ADAPTED)
 number_job_array = "038"
 
+# number of computing job within array `number_job_array
 index = str(sys.argv[1]).strip()
 
 # set working directory on ubelix (NEEDS TO BE ADAPTED)
@@ -28,7 +29,12 @@ bool_pred_train = True
 bool_pred_test = True
 
 
-parameters_data_kNp_dates_hyp = pd.read_csv(("parameters/05_job_setup/grid_combinations_data_kNp_dates_hyp_" + number_job_array + ".csv"), converters={"number_xy": str, "number_combination_features": str, "number_combination_kNp": str, "group_dates_train_test": str, "number_dates_train_test": str, "number_hyp_par_grid": str}).iloc[int(index)-1,:]
+directory_parameters = "parameters/"
+directory_data = "data/"
+directory_results = "results/"
+
+
+parameters_data_kNp_dates_hyp = pd.read_csv((directory_parameters + "05_job_setup/grid_combinations_data_kNp_dates_hyp_" + number_job_array + ".csv"), converters={"number_xy": str, "number_combination_features": str, "number_combination_kNp": str, "group_dates_train_test": str, "number_dates_train_test": str, "number_hyp_par_grid": str}).iloc[int(index)-1,:]
 
 number_xy = parameters_data_kNp_dates_hyp["number_xy"]
 number_combination_features = parameters_data_kNp_dates_hyp["number_combination_features"]
@@ -39,22 +45,18 @@ number_dates_train_test = parameters_data_kNp_dates_hyp["number_dates_train_test
 number_hyp_par_grid_lstm = parameters_data_kNp_dates_hyp["number_hyp_par_grid"]
 number_hyp_par_subgrid_lstm = parameters_data_kNp_dates_hyp["number_hyp_par_subgrid"]
 
-parameters_kNp = pd.read_csv(("parameters/03_kNp_dates_train_test/01_table_parameters_kNp.csv"), converters={"number": str, "k": int, "N": int, "p": int}).iloc[int(number_combination_kNp)-1,:]
+parameters_kNp = pd.read_csv((directory_parameters + "03_kNp_dates_train_test/01_table_parameters_kNp.csv"), converters={"number": str, "k": int, "N": int, "p": int}).iloc[int(number_combination_kNp)-1,:]
 
 p = parameters_kNp["p"]
 
 
-directory_data = "data/"
-directory_results = "results/"
-
-
 if number_hyp_par_subgrid_lstm == 0:
     
-    grid_hyp_params_lstm = pd.read_csv(("parameters/04_hyperparameters/lstm/"+ number_hyp_par_grid_lstm + "/hyp_par_lstm_" + number_hyp_par_grid_lstm + "_param_grid.csv"))
+    grid_hyp_params_lstm = pd.read_csv((directory_parameters + "04_hyperparameters/lstm/"+ number_hyp_par_grid_lstm + "/hyp_par_lstm_" + number_hyp_par_grid_lstm + "_param_grid.csv"))
     
 else:
     
-    grid_hyp_params_lstm = pd.read_csv(("parameters/04_hyperparameters/lstm/"+ number_hyp_par_grid_lstm + "/hyp_par_lstm_" + number_hyp_par_grid_lstm + "_param_grid_" + str(number_hyp_par_subgrid_lstm) + ".csv"))
+    grid_hyp_params_lstm = pd.read_csv((directory_parameters + "04_hyperparameters/lstm/"+ number_hyp_par_grid_lstm + "/hyp_par_lstm_" + number_hyp_par_grid_lstm + "_param_grid_" + str(number_hyp_par_subgrid_lstm) + ".csv"))
     
 
 # determine how many different combinations of hyper parameters will be tested
@@ -77,12 +79,12 @@ parameters_grid = pd.DataFrame({"number_xy": [number_xy] * n_par_combs_lstm,
 "number_hyp_par_subgrid_lstm": [number_hyp_par_subgrid_lstm] * n_par_combs_lstm})
 
 # read training data
-data_train = pd.read_csv(directory_data + "data_train_" + full_name_data_set + ".csv").sort_index(axis = 1)
-target_train = pd.read_csv(directory_data + "target_train_" + full_name_data_set + ".csv")
+data_train = pd.read_csv(directory_data + "features/train/features_train_" + full_name_data_set + ".csv").sort_index(axis = 1)
+target_train = pd.read_csv(directory_data + "target/train/target_train_" + full_name_data_set + ".csv")
 
 # read testing data
-data_test = pd.read_csv(directory_data + "data_test_" + full_name_data_set + ".csv").sort_index(axis = 1)
-target_test = pd.read_csv(directory_data + "target_test_" + full_name_data_set + ".csv")
+data_test = pd.read_csv(directory_data + "features/test/features_test_" + full_name_data_set + ".csv").sort_index(axis = 1)
+target_test = pd.read_csv(directory_data + "target/test/target_test_" + full_name_data_set + ".csv")
 
 
 
