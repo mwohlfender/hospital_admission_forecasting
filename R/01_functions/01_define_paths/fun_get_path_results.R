@@ -279,29 +279,6 @@ get_path_results_forecasts <- function(type_model,
 }
 
 
-get_path_results_joined_forecasts <- function(type_model,
-                                              number_xy,
-                                              number_grid_combinations_kNp_dates_train_test,
-                                              type_period = "test",
-                                              directory_results = Directory_Results) {
-  
-  output_filename <- get_file_name_model_data_params_short(type_model = type_model,
-                                                           number_xy = number_xy,
-                                                           number_combination_features = "NONE",
-                                                           name_data_set = "NONE",
-                                                           number_grid_combinations_kNp_dates_train_test = number_grid_combinations_kNp_dates_train_test,
-                                                           number_hyp_par_grid = "NONE")
-  
-  output <- paste0(directory_results,
-                   type_model, "/",
-                   number_xy, "/",
-                   "results_joined_forecasts_", output_filename, "_", type_period, ".csv")
-  
-  return(output)
-  
-}
-
-
 get_path_results_processed_detailed <- function(type_model,
                                                 number_xy,
                                                 number_combination_features,

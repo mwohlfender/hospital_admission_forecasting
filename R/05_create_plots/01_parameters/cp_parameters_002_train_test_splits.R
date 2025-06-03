@@ -212,7 +212,7 @@ ggsave(plot = plot_grid_train_test,
        width = 7.3, height = 8, units = c("in"))
 
 ggsave(plot = plot_grid_train_test,
-       filename = paste0(Directory_Plots, Subdirectory_Plots_Supplementary, "supplementary_figure_S1.pdf"),
+       filename = paste0(Directory_Plots, Subdirectory_Plots_Supplementary, "Supplementary_Figure_S1.pdf"),
        width = 7.3, height = 8, units = c("in"))
 
 

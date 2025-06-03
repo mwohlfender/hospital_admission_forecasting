@@ -148,6 +148,9 @@ Subdirectory_Plots_Data <- "data/"
 # subdirectory within `Directory_Plots` where plots of parameters are stored
 Subdirectory_Plots_Parameters <- "parameters/"
 
+# subdirectory within `Directory_Plots` where plots of results are stored
+Subdirectory_Plots_Results <- "results/"
+
 # subdirectory within `Directory_Plots` where tables are stored
 Subdirectory_Plots_Tables <- "tables/"
 

@@ -11,7 +11,7 @@
 table_models <- tribble(~type_model, ~label_type_model,
                              "locf",            "LOCF",
                                "lr",              "LR",
-                               "nn",             "RNN",
+                              "rnn",             "RNN",
                              "lstm",            "LSTM",
                               "xgb",         "XGBoost")
 

@@ -45,6 +45,6 @@ flextable::save_as_image(x = table_hyperparameters,
                          path = paste0(Directory_Plots, Subdirectory_Plots_Tables, "table_hyperparameters.png"))
 
 flextable::save_as_image(x = table_hyperparameters,
-                         path = paste0(Directory_Plots, Subdirectory_Plots_Supplementary, "supplementary_table_S1.png"))
+                         path = paste0(Directory_Plots, Subdirectory_Plots_Supplementary, "Supplementary_Table_S1.png"))
 
 

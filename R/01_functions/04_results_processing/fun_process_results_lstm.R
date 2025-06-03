@@ -1,9 +1,9 @@
 
 
 process_results_lstm <- function(number_job_array,
-                                 directory_data = paste0(Directory_Data, Subdirectory_Data_Feature_sets),
-                                 directory_parameters = Directory_Parameters,
-                                 directory_results_raw = Directory_Results,
+                                 directory_data,
+                                 directory_parameters,
+                                 directory_results_raw,
                                  directory_results_processed = Directory_Results,
                                  option_paths_data = "long",
                                  option_paths_results_raw = "long",
@@ -41,7 +41,7 @@ process_results_lstm <- function(number_job_array,
   
   
   # determine directories of output
-  directory_results_forecasts_lstm_train <- get_path_results_forecasts(directory_results = directory_results,
+  directory_results_forecasts_lstm_train <- get_path_results_forecasts(directory_results = directory_results_processed,
                                                                        type_model = "lstm",
                                                                        number_xy = number_xy,
                                                                        number_combination_features = number_combination_features,
@@ -49,7 +49,7 @@ process_results_lstm <- function(number_job_array,
                                                                        type_period = "train",
                                                                        option = "directory")
   
-  directory_results_forecasts_lstm_test <- get_path_results_forecasts(directory_results = directory_results,
+  directory_results_forecasts_lstm_test <- get_path_results_forecasts(directory_results = directory_results_processed,
                                                                       type_model = "lstm",
                                                                       number_xy = number_xy,
                                                                       number_combination_features = number_combination_features,
