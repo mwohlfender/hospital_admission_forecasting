@@ -1,5 +1,5 @@
 
-# python script `am_series_lstm`:
+# python script `am_004_lstm_ubelix`:
 
 # This python-script is run on the high performance computing cluster of the University of Bern, UBELIX.
 

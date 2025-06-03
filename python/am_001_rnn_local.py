@@ -1,5 +1,5 @@
 
-# python script `am_series_rnn`:
+# python script `am_001_rnn_local`:
 
 import sys
 import os
@@ -28,7 +28,7 @@ bool_pred_train = True
 bool_pred_test = True
 
 
-directory_parameters <- directory_computing_jobs + number_job_array + "/parameters/"
+directory_parameters = directory_computing_jobs + number_job_array + "/parameters/"
 directory_data = directory_computing_jobs + number_job_array + "/data/"
 directory_results = directory_computing_jobs + number_job_array + "/results/"
 

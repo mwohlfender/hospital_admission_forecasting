@@ -1,5 +1,5 @@
 
-# python script `am_series_lstm`:
+# python script `am_003_lstm_local`:
 
 import sys
 import os

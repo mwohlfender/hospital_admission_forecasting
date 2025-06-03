@@ -266,7 +266,7 @@ process_results_lr <- function(number_job_array,
         
         # determine columns of `results_lr_ii_0` to group by
         columns_to_group_by <- results_lr_ii_0 %>%
-          dplyr::select(-c("number_hyp_par_subgrid_lr")) %>%
+          dplyr::select(-c("iteration", "number_hyp_par_subgrid_lr")) %>%
           dplyr::select(-starts_with("rmse_")) %>%
           dplyr::select(-starts_with("y_pred_")) %>%
           names()
