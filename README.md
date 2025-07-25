@@ -10,5 +10,5 @@ This repository contains the code of the analysis of the paper "Machine learning
 * All models except last observation carried forward and linear regression were run on the high performance computing cluster of the University of Bern, [UBELIX](https://ubelix.hpc.unibe.ch).
 
 ## (B) Data
-* Wastewater has been retrieved from [eawag](https://sensors-eawag.ch/sars/laupen.html) under the he creative commons license [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/).
+* Wastewater has been retrieved from [eawag](https://sensors-eawag.ch/sars/laupen.html) under the creative commons license [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/).
 
