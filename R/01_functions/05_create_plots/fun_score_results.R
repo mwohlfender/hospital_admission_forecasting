@@ -185,12 +185,22 @@ score_results <- function(list_models = c("lr", "rnn", "lstm", "xgb"),
     
   }
   
+  if (include_locf) {
+    
+    list_widths <- c(1.85, rep(x = (7.3-1.85)/(length(list_models) + 1), times = length(list_models) + 1))
+    
+  } else {
+    
+    list_widths <- c(1.85, rep(x = (7.3-1.85)/length(list_models), times = length(list_models)))
+    
+  }
+  
   # create flextable: overview of average score per model and dataset for training period
   table_results_models_summarized_model_dataset_rmse_score_train <- flextable(data_table_results_models_summarized_model_dataset_rmse_score_train)
   table_results_models_summarized_model_dataset_rmse_score_train <- theme_vanilla(table_results_models_summarized_model_dataset_rmse_score_train)
   table_results_models_summarized_model_dataset_rmse_score_train <- width(table_results_models_summarized_model_dataset_rmse_score_train,
                                                                           j = 1:ncol(data_table_results_models_summarized_model_dataset_rmse_score_train),
-                                                                          width = c(1.85, 1.09, 1.09, 1.09, 1.09, 1.09),
+                                                                          width = list_widths,
                                                                           unit = "in")
   
   flextable::save_as_image(x = table_results_models_summarized_model_dataset_rmse_score_train,
@@ -202,7 +212,7 @@ score_results <- function(list_models = c("lr", "rnn", "lstm", "xgb"),
   table_results_models_summarized_model_dataset_rmse_score_test <- theme_vanilla(table_results_models_summarized_model_dataset_rmse_score_test)
   table_results_models_summarized_model_dataset_rmse_score_test <- width(table_results_models_summarized_model_dataset_rmse_score_test,
                                                                          j = 1:ncol(data_table_results_models_summarized_model_dataset_rmse_score_test),
-                                                                         width = c(1.85, 1.09, 1.09, 1.09, 1.09, 1.09),
+                                                                         width = list_widths,
                                                                          unit = "in")
   
   flextable::save_as_image(x = table_results_models_summarized_model_dataset_rmse_score_test,

@@ -10,7 +10,7 @@ process_results_lstm <- function(number_job_array,
                                  do_new = FALSE) {
   
   # read parameter grid of job array
-  grid_combinations_data_kNp_dates_hyp <- read_csv(file =  paste0(Directory_Parameters, Path_Grid_Combinations_Data_kNp_Dates_Hyp, number_job_array, ".csv"))
+  grid_combinations_data_kNp_dates_hyp <- read_csv(file =  paste0(directory_parameters, Path_Grid_Combinations_Data_kNp_Dates_Hyp, number_job_array, ".csv"))
   
   
   # determine parameters
